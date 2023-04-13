@@ -44,32 +44,29 @@ class _RegistroState extends State<Registro> {
                       borderRadius: BorderRadius.circular(20)),
                   margin: const EdgeInsets.only(left: 40, right: 40, top: 200),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 35, vertical: 80),
+                    padding: const EdgeInsets.symmetric(horizontal: 35),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
+                        const SizedBox(height: 100),
                         TextFormField(
                           controller: controluser,
                           decoration: const InputDecoration(
-                              label: Text(
-                            'E-Mail: ',
-                            style: TextStyle(
-                                color: Color.fromARGB(250, 6, 68, 108)),
-                          )),
+                              label: Text('E-Mail: ',
+                                  style: TextStyle(
+                                      color: Color.fromARGB(250, 6, 68, 108)))),
                         ),
-                        const SizedBox(height: 40),
+                        const SizedBox(height: 30),
                         TextFormField(
                           controller: controlpassw,
                           decoration: const InputDecoration(
-                              label: Text(
-                            'Contraseña: ',
-                            style: TextStyle(
-                                color: Color.fromARGB(250, 6, 68, 108)),
-                          )),
+                              label: Text('Contraseña: ',
+                                  style: TextStyle(
+                                      color: Color.fromARGB(250, 6, 68, 108)))),
                           obscureText: true,
                         ),
                         const SizedBox(height: 40),
+                        const SizedBox(height: 20),
                         ElevatedButton(
                           style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all<Color>(
@@ -99,15 +96,15 @@ class _RegistroState extends State<Registro> {
                             ],
                           ),
                           onPressed: () => _registro(context),
-                          //onPressed: () => Get.offAllNamed('/registro'),
                         ),
+                        const SizedBox(height: 40)
                       ],
                     ),
                   ),
                 ),
               ),
               const Positioned(
-                  top: 220,
+                  top: 260,
                   left: 100,
                   child: Text(
                     'Bienvenido a FarMax',
@@ -118,7 +115,7 @@ class _RegistroState extends State<Registro> {
                     ),
                   )),
               Positioned(
-                top: 120,
+                top: 140,
                 left: 130,
                 width: 100,
                 height: 100,

@@ -46,14 +46,26 @@ class _HomePagePacienteState extends State<HomePagePaciente>
     TabController tabController = TabController(length: 2, vsync: this);
     return Scaffold(
         appBar: AppBar(
+          title: Padding(
+            padding: const EdgeInsets.only(bottom: 0, top: 20),
+            child: Image.asset(
+              "assets/images/logoww1.png",
+              height: 200,
+              width: 300,
+              alignment: Alignment.bottomCenter,
+            ),
+          ),
           automaticallyImplyLeading: false,
           centerTitle: true,
-          title: const Text(
-            'FarMax',
-            style: TextStyle(
-                fontFamily: 'RobotoSlab', fontSize: 20, color: Colors.black),
+          backgroundColor: const Color.fromARGB(234, 6, 47, 86),
+          elevation: 0.0,
+          shape: const ContinuousRectangleBorder(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(60.0),
+              bottomRight: Radius.circular(60.0),
+            ),
           ),
-          backgroundColor: Colors.white,
+          toolbarHeight: 60,
         ),
         body: SingleChildScrollView(
           child:
@@ -189,7 +201,7 @@ class _CargarCardsState extends State<CargarCards> {
         ? Center(
             child: LoadingAnimationWidget.threeRotatingDots(
             color: const Color.fromARGB(150, 6, 68, 108),
-            size: 100,
+            size: 10,
           ))
         : ListView.builder(
             itemCount: nombres.length,

@@ -58,6 +58,7 @@ class _RegisterStepperState extends State<RegisterStepper> {
             onStepContinue: () {
               final isLastStep = currentStep == getSteps().length - 1;
               if (isLastStep) {
+                Get.offAllNamed("/mainPage");
               } else {
                 setState(() => currentStep += 1);
               }

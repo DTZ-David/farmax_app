@@ -93,13 +93,13 @@ class _HomePagePacienteState extends State<HomePagePaciente>
             ),
             const SizedBox(height: 10),
             SizedBox(
-              height: 560,
+              height: double.maxFinite,
               width: double.maxFinite,
               child: TabBarView(
                 controller: tabController,
-                children: [
-                  CargarCards(images: images),
-                  CargarCards2(images: images),
+                children: const [
+                  CargarCards(),
+                  CargarCards2(),
                 ],
               ),
             ),
@@ -109,12 +109,7 @@ class _HomePagePacienteState extends State<HomePagePaciente>
 }
 
 class CargarCards2 extends StatelessWidget {
-  const CargarCards2({
-    Key? key,
-    required this.images,
-  }) : super(key: key);
-
-  final Map<String, String> images;
+  const CargarCards2({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -182,9 +177,7 @@ class CargarCards2 extends StatelessWidget {
 class CargarCards extends StatefulWidget {
   const CargarCards({
     Key? key,
-    required this.images,
   }) : super(key: key);
-  final Map<String, String> images;
 
   @override
   State<CargarCards> createState() => _CargarCardsState();

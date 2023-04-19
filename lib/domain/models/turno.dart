@@ -1,22 +1,22 @@
-class Sesion {
-  final String idSesion;
+class Turno {
+  final String idTurno;
   final String idCliente;
   final String idAsesor;
   final String fecha;
   final String hora;
   final String estado;
 
-  Sesion(
-      {required this.idSesion,
+  Turno(
+      {required this.idTurno,
       required this.idCliente,
       required this.idAsesor,
       required this.fecha,
       required this.hora,
       required this.estado});
 
-  factory Sesion.desdeDoc(Map<String, dynamic> data) {
-    return Sesion(
-        idSesion: data['idSesion'] ?? '',
+  factory Turno.desdeDoc(Map<String, dynamic> data) {
+    return Turno(
+        idTurno: data['idTurno'] ?? '',
         idCliente: data['idPaciente'] ?? '',
         idAsesor: data['idPsicologo'] ?? '',
         fecha: data['fecha'] ?? '',
@@ -25,7 +25,7 @@ class Sesion {
   }
 
   Map<String, dynamic> toJson() => {
-        'idSesion': idSesion,
+        'idTurno': idTurno,
         'idCliente': idCliente,
         'idAsesor': idAsesor,
         'fecha': fecha,
@@ -35,11 +35,11 @@ class Sesion {
 }
 
 Map<String, dynamic> sesion1 = {
-  'idSesion': "1",
+  'idTurno': "1",
   'idCliente': "9909",
   'idAsesor': "123",
   'fecha': "14/03/23",
   'hora': "8.15 AM",
   'estado': "Pendiente"
 };
-List<Sesion> listadoSesiones = [Sesion.desdeDoc(sesion1)];
+List<Turno> listadoSesiones = [Turno.desdeDoc(sesion1)];

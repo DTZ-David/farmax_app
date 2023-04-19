@@ -35,46 +35,40 @@ class _RegistrarCitaState extends State<RegistrarCita> {
                   )),
             ),
             body: SingleChildScrollView(
-              child: Center(
-                child: Column(
-                  children: [
-                    const SizedBox(height: 50),
-                    SizedBox(
-                      height: 520,
-                      width: 330,
+              child: LayoutBuilder(
+                builder: (BuildContext context, BoxConstraints constraints) {
+                  return Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
                       child: Card(
                         elevation: 4,
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(40)),
+                          borderRadius: BorderRadius.circular(40),
+                        ),
                         color: Colors.white,
-                        child: Stack(
-                          children: [
-                            const Positioned(
-                              top: 10,
-                              left: 80,
-                              child: Text(
+                        child: SizedBox(
+                          width: constraints.maxWidth,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const SizedBox(height: 10),
+                              const Text(
                                 "¡Agenda tú turno!",
                                 style: TextStyle(
-                                    color: Color.fromARGB(234, 6, 47, 86),
-                                    fontSize: 20),
+                                  color: Color.fromARGB(234, 6, 47, 86),
+                                  fontSize: 20,
+                                ),
                               ),
-                            ),
-                            const Positioned(
-                              top: 80,
-                              left: 20,
-                              child: Text(
+                              const SizedBox(height: 20),
+                              const Text(
                                 "Tipo de documento",
                                 style: TextStyle(
-                                    color: Color.fromARGB(234, 6, 47, 86),
-                                    fontSize: 16),
+                                  color: Color.fromARGB(234, 6, 47, 86),
+                                  fontSize: 16,
+                                ),
                               ),
-                            ),
-                            Positioned(
-                              top: 110,
-                              left: 60,
-                              child: SizedBox(
-                                width: 200,
-                                height: 40,
+                              SizedBox(
+                                width: constraints.maxWidth * 0.8,
                                 child: DropdownButtonFormField(
                                     decoration: InputDecoration(
                                       contentPadding:
@@ -123,23 +117,16 @@ class _RegistrarCitaState extends State<RegistrarCita> {
                                       });
                                     }),
                               ),
-                            ),
-                            const Positioned(
-                              top: 170,
-                              left: 20,
-                              child: Text(
+                              const SizedBox(height: 20),
+                              const Text(
                                 "Numero Documento",
                                 style: TextStyle(
-                                    color: Color.fromARGB(234, 6, 47, 86),
-                                    fontSize: 16),
+                                  color: Color.fromARGB(234, 6, 47, 86),
+                                  fontSize: 16,
+                                ),
                               ),
-                            ),
-                            Positioned(
-                              top: 200,
-                              left: 60,
-                              child: SizedBox(
-                                width: 200,
-                                height: 40,
+                              SizedBox(
+                                width: constraints.maxWidth * 0.8,
                                 child: PhysicalModel(
                                   borderRadius: BorderRadius.circular(50.0),
                                   color: Colors.white,
@@ -165,23 +152,16 @@ class _RegistrarCitaState extends State<RegistrarCita> {
                                           ))),
                                 ),
                               ),
-                            ),
-                            const Positioned(
-                              top: 260,
-                              left: 20,
-                              child: Text(
+                              const SizedBox(height: 20),
+                              const Text(
                                 "Telefono",
                                 style: TextStyle(
-                                    color: Color.fromARGB(234, 6, 47, 86),
-                                    fontSize: 16),
+                                  color: Color.fromARGB(234, 6, 47, 86),
+                                  fontSize: 16,
+                                ),
                               ),
-                            ),
-                            Positioned(
-                              top: 290,
-                              left: 60,
-                              child: SizedBox(
-                                width: 200,
-                                height: 40,
+                              SizedBox(
+                                width: constraints.maxWidth * 0.8,
                                 child: PhysicalModel(
                                   borderRadius: BorderRadius.circular(50.0),
                                   color: Colors.white,
@@ -207,23 +187,16 @@ class _RegistrarCitaState extends State<RegistrarCita> {
                                           ))),
                                 ),
                               ),
-                            ),
-                            const Positioned(
-                              top: 350,
-                              left: 20,
-                              child: Text(
+                              const SizedBox(height: 20),
+                              const Text(
                                 "Sede",
                                 style: TextStyle(
-                                    color: Color.fromARGB(234, 6, 47, 86),
-                                    fontSize: 16),
+                                  color: Color.fromARGB(234, 6, 47, 86),
+                                  fontSize: 16,
+                                ),
                               ),
-                            ),
-                            Positioned(
-                              top: 380,
-                              left: 60,
-                              child: SizedBox(
-                                width: 200,
-                                height: 40,
+                              SizedBox(
+                                width: constraints.maxWidth * 0.8,
                                 child: DropdownButtonFormField(
                                     decoration: InputDecoration(
                                       contentPadding:
@@ -272,45 +245,42 @@ class _RegistrarCitaState extends State<RegistrarCita> {
                                       });
                                     }),
                               ),
-                            ),
-                            Positioned(
-                                top: 440,
-                                left: 110,
-                                child: ElevatedButton(
-                                  style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all<Color>(
-                                              const Color.fromARGB(
-                                                  250, 6, 68, 108)),
-                                      shape: MaterialStateProperty.all<
-                                              RoundedRectangleBorder>(
-                                          RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(18.0),
-                                              side: const BorderSide(
-                                                  color: Color.fromARGB(250, 6, 68, 108))))),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: const <Widget>[
-                                      Text("Siguiente"),
-                                    ],
-                                  ),
-                                  onPressed: () {
-                                    Get.offAllNamed('/registrarCitaP2');
-                                  },
-                                ))
-                          ],
+                              const SizedBox(height: 20),
+                              ElevatedButton(
+                                style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all<Color>(
+                                        const Color.fromARGB(250, 6, 68, 108)),
+                                    shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(18.0),
+                                            side: const BorderSide(
+                                                color: Color.fromARGB(
+                                                    250, 6, 68, 108))))),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const <Widget>[
+                                    Text("Siguiente"),
+                                  ],
+                                ),
+                                onPressed: () {
+                                  Get.offAllNamed('/registrarCitaP2');
+                                },
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    )
-                  ],
-                ),
+                    ),
+                  );
+                },
               ),
             ),
           ),
-          Positioned(
-            left: 140,
-            top: 30,
+          Center(
+              child: Align(
+            alignment: Alignment.topCenter,
             child: Card(
               clipBehavior: Clip.hardEdge,
               elevation: 2,
@@ -327,7 +297,7 @@ class _RegistrarCitaState extends State<RegistrarCita> {
                 ),
               ),
             ),
-          )
+          ))
         ],
       ),
     );

@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:farmax_app/domain/controller/gestionAsesor.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

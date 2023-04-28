@@ -93,7 +93,7 @@ class _HomePagePacienteState extends State<HomePagePaciente>
             ),
             const SizedBox(height: 10),
             SizedBox(
-              height: double.maxFinite,
+              height: 460,
               width: double.maxFinite,
               child: TabBarView(
                 controller: tabController,

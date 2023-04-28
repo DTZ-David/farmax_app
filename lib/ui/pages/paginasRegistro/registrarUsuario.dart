@@ -1,10 +1,9 @@
-// ignore_for_file: depend_on_referenced_packages, prefer_typing_uninitialized_variables, unused_local_variable
+// ignore_for_file: file_names, prefer_typing_uninitialized_variables
 
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
 
 class RegisterStepper extends StatefulWidget {
   final String user;
@@ -162,18 +161,81 @@ class _RegisterStepperState extends State<RegisterStepper> {
                   tipoId = selectedItem as String;
                 },
               ),
-              TextFormField(
-                keyboardType: TextInputType.number,
-                controller: controlidentificacion,
-                decoration: const InputDecoration(labelText: 'Identificacion'),
+              const SizedBox(height: 20),
+              SizedBox(
+                width: 300,
+                child: PhysicalModel(
+                  borderRadius: BorderRadius.circular(50.0),
+                  color: Colors.white,
+                  elevation: 5.0,
+                  shadowColor: Colors.grey,
+                  child: TextFormField(
+                      obscureText: false,
+                      controller: controlidentificacion,
+                      decoration: InputDecoration(
+                          suffixIcon: const Icon(Icons.dvr),
+                          floatingLabelBehavior: FloatingLabelBehavior.never,
+                          contentPadding: const EdgeInsets.all(14),
+                          border: InputBorder.none,
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                  width: 1, color: Colors.grey),
+                              borderRadius: BorderRadius.circular(50.0)),
+                          label: const Text(
+                            'Identificacion',
+                            style: TextStyle(color: Colors.grey),
+                          ))),
+                ),
               ),
-              TextFormField(
-                controller: controlnombre,
-                decoration: const InputDecoration(labelText: 'Nombre'),
+              const SizedBox(height: 20),
+              SizedBox(
+                width: 300,
+                child: PhysicalModel(
+                  borderRadius: BorderRadius.circular(50.0),
+                  color: Colors.white,
+                  elevation: 5.0,
+                  shadowColor: Colors.grey,
+                  child: TextFormField(
+                      obscureText: false,
+                      controller: controlnombre,
+                      decoration: InputDecoration(
+                          floatingLabelBehavior: FloatingLabelBehavior.never,
+                          contentPadding: const EdgeInsets.all(14),
+                          border: InputBorder.none,
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                  width: 1, color: Colors.grey),
+                              borderRadius: BorderRadius.circular(50.0)),
+                          label: const Text(
+                            'Nombre',
+                            style: TextStyle(color: Colors.grey),
+                          ))),
+                ),
               ),
-              TextFormField(
-                controller: controlapellido,
-                decoration: const InputDecoration(labelText: 'Apellido:'),
+              const SizedBox(height: 20),
+              SizedBox(
+                width: 300,
+                child: PhysicalModel(
+                  borderRadius: BorderRadius.circular(50.0),
+                  color: Colors.white,
+                  elevation: 5.0,
+                  shadowColor: Colors.grey,
+                  child: TextFormField(
+                      obscureText: false,
+                      controller: controlapellido,
+                      decoration: InputDecoration(
+                          floatingLabelBehavior: FloatingLabelBehavior.never,
+                          contentPadding: const EdgeInsets.all(14),
+                          border: InputBorder.none,
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                  width: 1, color: Colors.grey),
+                              borderRadius: BorderRadius.circular(50.0)),
+                          label: const Text(
+                            'Apellido',
+                            style: TextStyle(color: Colors.grey),
+                          ))),
+                ),
               ),
               const SizedBox(
                 height: 10,
@@ -186,10 +248,33 @@ class _RegisterStepperState extends State<RegisterStepper> {
           title: const Text('Direccion'),
           content: Column(
             children: [
-              TextFormField(
-                controller: controlapellido,
-                decoration: const InputDecoration(labelText: 'Direccion'),
+              const SizedBox(height: 20),
+              SizedBox(
+                width: 300,
+                child: PhysicalModel(
+                  borderRadius: BorderRadius.circular(50.0),
+                  color: Colors.white,
+                  elevation: 5.0,
+                  shadowColor: Colors.grey,
+                  child: TextFormField(
+                      obscureText: false,
+                      controller: controlidentificacion,
+                      decoration: InputDecoration(
+                          suffixIcon: const Icon(Icons.assistant_navigation),
+                          floatingLabelBehavior: FloatingLabelBehavior.never,
+                          contentPadding: const EdgeInsets.all(14),
+                          border: InputBorder.none,
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                  width: 1, color: Colors.grey),
+                              borderRadius: BorderRadius.circular(50.0)),
+                          label: const Text(
+                            'Direccion',
+                            style: TextStyle(color: Colors.grey),
+                          ))),
+                ),
               ),
+              const SizedBox(height: 20),
             ],
           ),
         ),
@@ -198,14 +283,57 @@ class _RegisterStepperState extends State<RegisterStepper> {
           title: const Text('Contacto'),
           content: Column(
             children: [
-              TextFormField(
-                controller: controlapellido,
-                decoration: const InputDecoration(labelText: 'E-Mail'),
+              const SizedBox(height: 20),
+              SizedBox(
+                width: 300,
+                child: PhysicalModel(
+                  borderRadius: BorderRadius.circular(50.0),
+                  color: Colors.white,
+                  elevation: 5.0,
+                  shadowColor: Colors.grey,
+                  child: TextFormField(
+                      obscureText: false,
+                      controller: controlidentificacion,
+                      decoration: InputDecoration(
+                          suffixIcon: const Icon(Icons.alternate_email),
+                          floatingLabelBehavior: FloatingLabelBehavior.never,
+                          contentPadding: const EdgeInsets.all(14),
+                          border: InputBorder.none,
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                  width: 1, color: Colors.grey),
+                              borderRadius: BorderRadius.circular(50.0)),
+                          label: const Text(
+                            'E-Mail',
+                            style: TextStyle(color: Colors.grey),
+                          ))),
+                ),
               ),
-              TextFormField(
-                keyboardType: TextInputType.number,
-                controller: controlapellido,
-                decoration: const InputDecoration(labelText: 'Numero'),
+              const SizedBox(height: 20),
+              SizedBox(
+                width: 300,
+                child: PhysicalModel(
+                  borderRadius: BorderRadius.circular(50.0),
+                  color: Colors.white,
+                  elevation: 5.0,
+                  shadowColor: Colors.grey,
+                  child: TextFormField(
+                      obscureText: false,
+                      controller: controlidentificacion,
+                      decoration: InputDecoration(
+                          suffixIcon: const Icon(Icons.call),
+                          floatingLabelBehavior: FloatingLabelBehavior.never,
+                          contentPadding: const EdgeInsets.all(14),
+                          border: InputBorder.none,
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                  width: 1, color: Colors.grey),
+                              borderRadius: BorderRadius.circular(50.0)),
+                          label: const Text(
+                            'Numero',
+                            style: TextStyle(color: Colors.grey),
+                          ))),
+                ),
               ),
             ],
           ),

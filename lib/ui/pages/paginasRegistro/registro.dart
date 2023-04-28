@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_final_fields
+
 import 'package:farmax_app/ui/pages/paginasRegistro/registrarUsuario.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -49,21 +51,62 @@ class _RegistroState extends State<Registro> {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         const SizedBox(height: 100),
-                        TextFormField(
-                          controller: controluser,
-                          decoration: const InputDecoration(
-                              label: Text('E-Mail: ',
-                                  style: TextStyle(
-                                      color: Color.fromARGB(250, 6, 68, 108)))),
+                        SizedBox(
+                          width: 300,
+                          child: PhysicalModel(
+                            borderRadius: BorderRadius.circular(50.0),
+                            color: Colors.white,
+                            elevation: 5.0,
+                            shadowColor: Colors.grey,
+                            child: TextFormField(
+                                obscureText: false,
+                                controller: controluser,
+                                decoration: InputDecoration(
+                                    suffixIcon:
+                                        const Icon(Icons.alternate_email),
+                                    floatingLabelBehavior:
+                                        FloatingLabelBehavior.never,
+                                    contentPadding: const EdgeInsets.all(14),
+                                    border: InputBorder.none,
+                                    enabledBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            width: 1, color: Colors.grey),
+                                        borderRadius:
+                                            BorderRadius.circular(50.0)),
+                                    label: const Text(
+                                      'Email',
+                                      style: TextStyle(color: Colors.grey),
+                                    ))),
+                          ),
                         ),
                         const SizedBox(height: 30),
-                        TextFormField(
-                          controller: controlpassw,
-                          decoration: const InputDecoration(
-                              label: Text('Contraseña: ',
-                                  style: TextStyle(
-                                      color: Color.fromARGB(250, 6, 68, 108)))),
-                          obscureText: true,
+                        SizedBox(
+                          width: 300,
+                          child: PhysicalModel(
+                            borderRadius: BorderRadius.circular(50.0),
+                            color: Colors.white,
+                            elevation: 5.0,
+                            shadowColor: Colors.grey,
+                            child: TextFormField(
+                                obscureText: true,
+                                controller: controlpassw,
+                                decoration: InputDecoration(
+                                    suffixIcon: const Icon(
+                                        Icons.remove_red_eye_outlined),
+                                    floatingLabelBehavior:
+                                        FloatingLabelBehavior.never,
+                                    contentPadding: const EdgeInsets.all(14),
+                                    border: InputBorder.none,
+                                    enabledBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            width: 1, color: Colors.grey),
+                                        borderRadius:
+                                            BorderRadius.circular(50.0)),
+                                    label: const Text(
+                                      'Contraseña',
+                                      style: TextStyle(color: Colors.grey),
+                                    ))),
+                          ),
                         ),
                         const SizedBox(height: 40),
                         const SizedBox(height: 20),

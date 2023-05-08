@@ -68,27 +68,32 @@ class _RegisterStepperState extends State<RegisterStepper> {
                 : () => setState(() => currentStep -= 1),
             controlsBuilder: (context, ControlsDetails details) {
               final isLastStep = currentStep == getSteps().length - 1;
-              return Row(
-                children: <Widget>[
-                  Container(
-                    width: 120,
-                    margin: const EdgeInsets.only(left: 15),
-                    child: ElevatedButton(
-                      onPressed: details.onStepContinue,
-                      child: Text(isLastStep ? 'Enviar' : 'Siguiente'),
-                    ),
-                  ),
-                  const SizedBox(width: 20),
-                  if (currentStep != 0)
+              return Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
                     Container(
-                      width: 120,
+                      width: 100,
+                      height: 40,
                       margin: const EdgeInsets.only(left: 15),
                       child: ElevatedButton(
-                        onPressed: details.onStepCancel,
-                        child: const Text('Atras'),
+                        onPressed: details.onStepContinue,
+                        child: Text(isLastStep ? 'Enviar' : 'Siguiente'),
                       ),
                     ),
-                ],
+                    const SizedBox(width: 20),
+                    if (currentStep != 0)
+                      Container(
+                        width: 100,
+                        height: 40,
+                        margin: const EdgeInsets.only(left: 15),
+                        child: ElevatedButton(
+                          onPressed: details.onStepCancel,
+                          child: const Text('Atras'),
+                        ),
+                      ),
+                  ],
+                ),
               );
             },
           ),
@@ -238,7 +243,7 @@ class _RegisterStepperState extends State<RegisterStepper> {
                 ),
               ),
               const SizedBox(
-                height: 10,
+                height: 30,
               ),
             ],
           ),
@@ -274,7 +279,7 @@ class _RegisterStepperState extends State<RegisterStepper> {
                           ))),
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 30),
             ],
           ),
         ),
@@ -335,6 +340,7 @@ class _RegisterStepperState extends State<RegisterStepper> {
                           ))),
                 ),
               ),
+              const SizedBox(height: 30)
             ],
           ),
         )

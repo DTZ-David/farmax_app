@@ -110,35 +110,41 @@ class _RegistroState extends State<Registro> {
                         ),
                         const SizedBox(height: 40),
                         const SizedBox(height: 20),
-                        ElevatedButton(
-                          style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                  const Color.fromARGB(250, 6, 68, 108)),
-                              shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
-                                      side: const BorderSide(
-                                          color: Color.fromARGB(
-                                              250, 6, 68, 108))))),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              const Text("Registrate"),
-                              if (_loading)
-                                Container(
-                                  height: 20,
-                                  width: 20,
-                                  margin: const EdgeInsets.only(left: 20),
-                                  child:
-                                      LoadingAnimationWidget.threeRotatingDots(
-                                    color: Colors.white,
-                                    size: 15,
-                                  ),
-                                )
-                            ],
+                        SizedBox(
+                          width: 200,
+                          height: 50,
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        const Color.fromARGB(250, 6, 68, 108)),
+                                shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(30.0),
+                                        side: const BorderSide(
+                                            color: Color.fromARGB(
+                                                250, 6, 68, 108))))),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                const Text("Registrate"),
+                                if (_loading)
+                                  Container(
+                                    height: 20,
+                                    width: 20,
+                                    margin: const EdgeInsets.only(left: 30),
+                                    child: LoadingAnimationWidget
+                                        .threeRotatingDots(
+                                      color: Colors.white,
+                                      size: 15,
+                                    ),
+                                  )
+                              ],
+                            ),
+                            onPressed: () => _registro(context),
                           ),
-                          onPressed: () => _registro(context),
                         ),
                         const SizedBox(height: 40)
                       ],
@@ -146,28 +152,34 @@ class _RegistroState extends State<Registro> {
                   ),
                 ),
               ),
-              const Positioned(
+              Positioned(
                   top: 260,
-                  left: 100,
-                  child: Text(
+                  left: MediaQuery.of(context).size.width * 0.5 - 70,
+                  child: const Text(
                     'Bienvenido a FarMax',
-                    textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Color.fromARGB(250, 6, 68, 108),
                       fontSize: 16,
                     ),
                   )),
               Positioned(
-                top: 140,
-                left: 130,
-                width: 100,
-                height: 100,
-                child: Center(
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                    clipBehavior: Clip.hardEdge,
-                    child: Image.asset('assets/images/logo.png'),
+                top: 130,
+                left: MediaQuery.of(context).size.width * 0.5 -
+                    50, // centrado horizontalmente
+                child: Card(
+                  clipBehavior: Clip.hardEdge,
+                  elevation: 2,
+                  child: Container(
+                    height: 100,
+                    padding: const EdgeInsets.all(16),
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle,
+                    ),
+                    child: SizedBox(
+                      height: 60,
+                      child: Image.asset('assets/images/logo.png'),
+                    ),
                   ),
                 ),
               ),

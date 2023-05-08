@@ -40,7 +40,7 @@ class _RegistrarCitaState extends State<RegistrarCita> {
                   children: [
                     const SizedBox(height: 50),
                     SizedBox(
-                      height: 520,
+                      height: 540,
                       width: 330,
                       child: Padding(
                         padding: const EdgeInsets.all(16),
@@ -284,8 +284,10 @@ class _RegistrarCitaState extends State<RegistrarCita> {
                                 ),
                               ),
                               Positioned(
-                                  top: 440,
-                                  left: 110,
+                                  top: 430,
+                                  left:
+                                      MediaQuery.of(context).size.width * 0.5 -
+                                          90,
                                   child: ElevatedButton(
                                     style: ButtonStyle(
                                         backgroundColor:

@@ -93,7 +93,7 @@ class _HomePagePacienteState extends State<HomePagePaciente>
             ),
             const SizedBox(height: 10),
             SizedBox(
-              height: 460,
+              height: MediaQuery.of(context).size.height * 0.7,
               width: double.maxFinite,
               child: TabBarView(
                 controller: tabController,
@@ -216,7 +216,7 @@ class _CargarCardsState extends State<CargarCards> {
                               child: AlertDialog(
                                 backgroundColor: Colors.white,
                                 title: const Text(
-                                  "Editar Sesión",
+                                  "Editar Turno",
                                   style: TextStyle(
                                       color: Color.fromARGB(255, 0, 0, 0)),
                                 ),
@@ -230,7 +230,7 @@ class _CargarCardsState extends State<CargarCards> {
                                             horizontal: 20, vertical: 50),
                                         child: DropdownButtonFormField<String>(
                                           decoration: InputDecoration(
-                                              hintText: "Estado de la Sesión",
+                                              hintText: "Estado del Turno",
                                               enabledBorder: OutlineInputBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(10),

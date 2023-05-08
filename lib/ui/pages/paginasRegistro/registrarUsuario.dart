@@ -26,6 +26,10 @@ class _RegisterStepperState extends State<RegisterStepper> {
   TextEditingController controlidentificacion = TextEditingController();
   TextEditingController controlnombre = TextEditingController();
   TextEditingController controlapellido = TextEditingController();
+  TextEditingController controldireccion = TextEditingController();
+  TextEditingController controlemail = TextEditingController();
+
+  TextEditingController controlnumero = TextEditingController();
 
   _camGaleria(bool op) async {
     XFile? image;
@@ -72,15 +76,6 @@ class _RegisterStepperState extends State<RegisterStepper> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Container(
-                      width: 100,
-                      height: 40,
-                      margin: const EdgeInsets.only(left: 15),
-                      child: ElevatedButton(
-                        onPressed: details.onStepContinue,
-                        child: Text(isLastStep ? 'Enviar' : 'Siguiente'),
-                      ),
-                    ),
                     const SizedBox(width: 20),
                     if (currentStep != 0)
                       Container(
@@ -92,6 +87,15 @@ class _RegisterStepperState extends State<RegisterStepper> {
                           child: const Text('Atras'),
                         ),
                       ),
+                    Container(
+                      width: 100,
+                      height: 40,
+                      margin: const EdgeInsets.only(left: 15),
+                      child: ElevatedButton(
+                        onPressed: details.onStepContinue,
+                        child: Text(isLastStep ? 'Enviar' : 'Siguiente'),
+                      ),
+                    ),
                   ],
                 ),
               );
@@ -263,7 +267,7 @@ class _RegisterStepperState extends State<RegisterStepper> {
                   shadowColor: Colors.grey,
                   child: TextFormField(
                       obscureText: false,
-                      controller: controlidentificacion,
+                      controller: controldireccion,
                       decoration: InputDecoration(
                           suffixIcon: const Icon(Icons.assistant_navigation),
                           floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -298,7 +302,7 @@ class _RegisterStepperState extends State<RegisterStepper> {
                   shadowColor: Colors.grey,
                   child: TextFormField(
                       obscureText: false,
-                      controller: controlidentificacion,
+                      controller: controlemail,
                       decoration: InputDecoration(
                           suffixIcon: const Icon(Icons.alternate_email),
                           floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -324,7 +328,7 @@ class _RegisterStepperState extends State<RegisterStepper> {
                   shadowColor: Colors.grey,
                   child: TextFormField(
                       obscureText: false,
-                      controller: controlidentificacion,
+                      controller: controlnumero,
                       decoration: InputDecoration(
                           suffixIcon: const Icon(Icons.call),
                           floatingLabelBehavior: FloatingLabelBehavior.never,

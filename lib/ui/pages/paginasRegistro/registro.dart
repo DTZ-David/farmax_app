@@ -15,6 +15,9 @@ class Registro extends StatefulWidget {
 class _RegistroState extends State<Registro> {
   TextEditingController controluser = TextEditingController();
   TextEditingController controlpassw = TextEditingController();
+  bool _obscureText = true;
+
+  bool _isHidden = true;
 
   late bool _loading = false;
 
@@ -59,7 +62,6 @@ class _RegistroState extends State<Registro> {
                             elevation: 5.0,
                             shadowColor: Colors.grey,
                             child: TextFormField(
-                                obscureText: false,
                                 controller: controluser,
                                 decoration: InputDecoration(
                                     suffixIcon:
@@ -88,11 +90,10 @@ class _RegistroState extends State<Registro> {
                             elevation: 5.0,
                             shadowColor: Colors.grey,
                             child: TextFormField(
-                                obscureText: true,
+                                obscureText: _obscureText,
                                 controller: controlpassw,
                                 decoration: InputDecoration(
-                                    suffixIcon: const Icon(
-                                        Icons.remove_red_eye_outlined),
+                                    suffixIcon: togglePassword(),
                                     floatingLabelBehavior:
                                         FloatingLabelBehavior.never,
                                     contentPadding: const EdgeInsets.all(14),
@@ -225,6 +226,23 @@ class _RegistroState extends State<Registro> {
           ],
         ),
       );
+  Widget togglePassword() {
+    return IconButton(
+        onPressed: () {
+          setState(() {
+            _obscureText = !_obscureText;
+          });
+        },
+        icon: _obscureText
+            ? const Icon(
+                Icons.visibility,
+                color: Colors.blue,
+              )
+            : const Icon(
+                Icons.visibility_off,
+                color: Colors.grey,
+              ));
+  }
 }
 
 class MyClipper extends CustomClipper<Path> {

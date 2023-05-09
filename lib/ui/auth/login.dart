@@ -12,7 +12,7 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   TextEditingController controluser = TextEditingController();
   TextEditingController controlpass = TextEditingController();
-
+  bool _obscureText = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,10 +61,10 @@ class _LoginState extends State<Login> {
                   elevation: 5.0,
                   shadowColor: Colors.grey,
                   child: TextFormField(
-                      obscureText: true,
+                      obscureText: _obscureText,
                       controller: controlpass,
                       decoration: InputDecoration(
-                          suffixIcon: const Icon(Icons.remove_red_eye_outlined),
+                          suffixIcon: togglePassword(),
                           floatingLabelBehavior: FloatingLabelBehavior.never,
                           contentPadding: const EdgeInsets.all(14),
                           border: InputBorder.none,
@@ -135,5 +135,23 @@ class _LoginState extends State<Login> {
             ]),
           ]),
         ));
+  }
+
+  Widget togglePassword() {
+    return IconButton(
+        onPressed: () {
+          setState(() {
+            _obscureText = !_obscureText;
+          });
+        },
+        icon: _obscureText
+            ? const Icon(
+                Icons.visibility,
+                color: Colors.blue,
+              )
+            : const Icon(
+                Icons.visibility_off,
+                color: Colors.grey,
+              ));
   }
 }

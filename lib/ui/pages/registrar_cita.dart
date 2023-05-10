@@ -62,15 +62,6 @@ class _RegistrarCitaState extends State<RegistrarCita> {
                   child: Column(
                     children: [
                       const SizedBox(height: 50),
-                      const Positioned(
-                        top: 120,
-                        child: Text(
-                          "¡Agenda tú turno!",
-                          style: TextStyle(
-                              color: Color.fromARGB(234, 6, 47, 86),
-                              fontSize: 20),
-                        ),
-                      ),
                       SizedBox(
                         height: 520,
                         width: 330,
@@ -84,173 +75,75 @@ class _RegistrarCitaState extends State<RegistrarCita> {
                             child: Stack(
                               children: [
                                 const Positioned(
-                                  top: 80,
-                                  left: 20,
+                                  top: 40,
+                                  left: 70,
                                   child: Text(
-                                    "Tipo de documento",
+                                    "¡Agenda tú turno!",
                                     style: TextStyle(
                                         color: Color.fromARGB(234, 6, 47, 86),
-                                        fontSize: 16),
-                                  ),
-                                ),
-                                Positioned(
-                                  top: 110,
-                                  left: 60,
-                                  child: SizedBox(
-                                    width: 200,
-                                    height: 40,
-                                    child: DropdownButtonFormField(
-                                        decoration: InputDecoration(
-                                          contentPadding:
-                                              const EdgeInsets.symmetric(
-                                                  vertical: 7),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            borderSide: const BorderSide(
-                                                color: Colors.white, width: 2),
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            borderSide: const BorderSide(
-                                              color: Colors.grey,
-                                              width: 1,
-                                            ),
-                                          ),
-                                        ),
-                                        dropdownColor: Colors.white,
-                                        icon: Container(
-                                          decoration: const BoxDecoration(
-                                            border: Border(
-                                              left: BorderSide(
-                                                  color: Colors.grey, width: 1),
-                                            ),
-                                          ),
-                                          child: const Icon(
-                                              Icons.arrow_downward_rounded),
-                                        ),
-                                        iconEnabledColor: const Color.fromARGB(
-                                            234, 57, 59, 61), //Icon color
-                                        style: const TextStyle(
-                                            color: Colors.grey, //Font color
-                                            fontSize: 20),
-                                        iconSize: 25,
-                                        isExpanded: true,
-                                        items: items.map((String items) {
-                                          return DropdownMenuItem(
-                                            value: items,
-                                            child: Text(items),
-                                          );
-                                        }).toList(),
-                                        onChanged: (String? newValue) {
-                                          setState(() {
-                                            dropdownvalue = newValue!;
-                                          });
-                                        }),
+                                        fontSize: 20),
                                   ),
                                 ),
                                 const Positioned(
-                                  top: 170,
-                                  left: 20,
-                                  child: Text(
-                                    "Numero Documento",
-                                    style: TextStyle(
-                                        color: Color.fromARGB(234, 6, 47, 86),
-                                        fontSize: 16),
-                                  ),
-                                ),
+                                    top: 100,
+                                    left: 80,
+                                    child: Text(
+                                      "¡Sube tu Formula!",
+                                      style: TextStyle(
+                                          color: Color.fromARGB(234, 6, 47, 86),
+                                          fontSize: 16),
+                                    )),
                                 Positioned(
-                                  top: 200,
-                                  left: 60,
-                                  child: SizedBox(
-                                    width: 200,
-                                    height: 40,
-                                    child: PhysicalModel(
-                                      borderRadius: BorderRadius.circular(50.0),
-                                      color: Colors.white,
-                                      elevation: 1.0,
-                                      shadowColor: Colors.grey,
-                                      child: TextFormField(
-                                          controller: controlCed,
-                                          decoration: InputDecoration(
-                                              floatingLabelBehavior:
-                                                  FloatingLabelBehavior.never,
-                                              contentPadding:
-                                                  const EdgeInsets.all(14),
-                                              border: InputBorder.none,
-                                              enabledBorder: OutlineInputBorder(
-                                                  borderSide: const BorderSide(
-                                                      width: 1,
-                                                      color: Colors.grey),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          50.0)),
-                                              label: const Text(
-                                                'Numero Documento',
-                                                style: TextStyle(
-                                                    color: Colors.grey),
-                                              ))),
+                                  top: 120,
+                                  left: 100,
+                                  child: GestureDetector(
+                                    onTap: () async {
+                                      _opcioncamara(context);
+                                    },
+                                    child: CircleAvatar(
+                                      radius: 50,
+                                      backgroundColor: Colors.transparent,
+                                      child: _image != null
+                                          ? ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(48),
+                                              child: Image.file(
+                                                _image,
+                                                width: 60,
+                                                height: 60,
+                                                fit: BoxFit.fitHeight,
+                                              ),
+                                            )
+                                          : Container(
+                                              decoration: BoxDecoration(
+                                                color: const Color.fromARGB(
+                                                    234, 6, 47, 86),
+                                                borderRadius:
+                                                    BorderRadius.circular(48),
+                                              ),
+                                              width: 60,
+                                              height: 60,
+                                              child: const Icon(
+                                                Icons.camera_alt_outlined,
+                                                color: Colors.white,
+                                              ),
+                                            ),
                                     ),
                                   ),
                                 ),
                                 const Positioned(
                                   top: 260,
-                                  left: 20,
+                                  left: 70,
                                   child: Text(
-                                    "Telefono",
+                                    "Selecciona la sede",
                                     style: TextStyle(
                                         color: Color.fromARGB(234, 6, 47, 86),
-                                        fontSize: 16),
+                                        fontSize: 18),
                                   ),
                                 ),
                                 Positioned(
-                                  top: 290,
-                                  left: 60,
-                                  child: SizedBox(
-                                    width: 200,
-                                    height: 40,
-                                    child: PhysicalModel(
-                                      borderRadius: BorderRadius.circular(50.0),
-                                      color: Colors.white,
-                                      elevation: 5.0,
-                                      shadowColor: Colors.grey,
-                                      child: TextFormField(
-                                          controller: controlTel,
-                                          decoration: InputDecoration(
-                                              floatingLabelBehavior:
-                                                  FloatingLabelBehavior.never,
-                                              contentPadding:
-                                                  const EdgeInsets.all(14),
-                                              border: InputBorder.none,
-                                              enabledBorder: OutlineInputBorder(
-                                                  borderSide: const BorderSide(
-                                                      width: 1,
-                                                      color: Colors.grey),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          50.0)),
-                                              label: const Text(
-                                                'Telefono',
-                                                style: TextStyle(
-                                                    color: Colors.grey),
-                                              ))),
-                                    ),
-                                  ),
-                                ),
-                                const Positioned(
-                                  top: 350,
-                                  left: 20,
-                                  child: Text(
-                                    "Sede",
-                                    style: TextStyle(
-                                        color: Color.fromARGB(234, 6, 47, 86),
-                                        fontSize: 16),
-                                  ),
-                                ),
-                                Positioned(
-                                  top: 380,
-                                  left: 60,
+                                  top: 300,
+                                  left: 45,
                                   child: SizedBox(
                                     width: 200,
                                     height: 40,
@@ -270,7 +163,7 @@ class _RegistrarCitaState extends State<RegistrarCita> {
                                                 BorderRadius.circular(10),
                                             borderSide: const BorderSide(
                                               color: Colors.grey,
-                                              width: 1,
+                                              width: 2,
                                             ),
                                           ),
                                         ),
@@ -306,47 +199,10 @@ class _RegistrarCitaState extends State<RegistrarCita> {
                                   ),
                                 ),
                                 Positioned(
-                                  top: -20,
-                                  left: 100,
-                                  child: GestureDetector(
-                                    onTap: () async {
-                                      _opcioncamara(context);
-                                    },
-                                    child: CircleAvatar(
-                                      radius: 50,
-                                      backgroundColor: Colors.transparent,
-                                      child: _image != null
-                                          ? ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(48),
-                                              child: Image.file(
-                                                _image,
-                                                width: 60,
-                                                height: 60,
-                                                fit: BoxFit.fitHeight,
-                                              ),
-                                            )
-                                          : Container(
-                                              decoration: BoxDecoration(
-                                                color: Colors.transparent,
-                                                borderRadius:
-                                                    BorderRadius.circular(48),
-                                              ),
-                                              width: 60,
-                                              height: 60,
-                                              child: const Icon(
-                                                Icons.camera_alt_outlined,
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                    top: 440,
+                                    top: 380,
                                     left: MediaQuery.of(context).size.width *
                                             0.5 -
-                                        120,
+                                        85,
                                     child: ElevatedButton(
                                       style: ButtonStyle(
                                           backgroundColor:

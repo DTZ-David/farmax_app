@@ -325,31 +325,6 @@ class _RegisterStepperState extends State<RegisterStepper> {
           content: Column(
             children: [
               const SizedBox(height: 20),
-              SizedBox(
-                width: 300,
-                child: PhysicalModel(
-                  borderRadius: BorderRadius.circular(50.0),
-                  color: Colors.white,
-                  elevation: 5.0,
-                  shadowColor: Colors.grey,
-                  child: TextFormField(
-                      obscureText: false,
-                      controller: controlemail,
-                      decoration: InputDecoration(
-                          suffixIcon: const Icon(Icons.alternate_email),
-                          floatingLabelBehavior: FloatingLabelBehavior.never,
-                          contentPadding: const EdgeInsets.all(14),
-                          border: InputBorder.none,
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  width: 1, color: Colors.grey),
-                              borderRadius: BorderRadius.circular(50.0)),
-                          label: const Text(
-                            'E-Mail',
-                            style: TextStyle(color: Colors.grey),
-                          ))),
-                ),
-              ),
               const SizedBox(height: 20),
               SizedBox(
                 width: 300,

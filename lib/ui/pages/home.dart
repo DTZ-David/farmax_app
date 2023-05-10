@@ -24,8 +24,16 @@ class _HomePagePacienteState extends State<HomePagePaciente>
   @override
   Widget build(BuildContext context) {
     nombres = ["Jhohan", "Juan", "Estefani", "Camila"];
-    hora = ["8.15 AM", "9.30 AM", "8.15 AM", "9.30 AM"];
+    nombresFinalizado = ["Claudia", "Edna", "Sofia", "Clara"];
+    hora = ["3.15 PM", "5.30 PM", "6.15 PM", "6.30 PM"];
+    horasFinalizado = ["8.15 AM", "9.30 AM", "8.15 AM", "9.30 AM"];
     fotos = [
+      "https://www.elquindiano.com/upload/article/b202109201119323.jpg",
+      "https://d20ohkaloyme4g.cloudfront.net/img/document_thumbnails/142afe1662fc33b4efa2624591189ff2/thumb_1200_846.png",
+      "https://imgv2-2-f.scribdassets.com/img/document/438633881/original/da09b8a1bf/1682552272?v=1",
+      "https://d20ohkaloyme4g.cloudfront.net/img/document_thumbnails/e4e50e841cff1fe6e1fabb82b56d5e4c/thumb_1200_846.png"
+    ];
+    fotosFinalizado = [
       "https://www.elquindiano.com/upload/article/b202109201119323.jpg",
       "https://d20ohkaloyme4g.cloudfront.net/img/document_thumbnails/142afe1662fc33b4efa2624591189ff2/thumb_1200_846.png",
       "https://imgv2-2-f.scribdassets.com/img/document/438633881/original/da09b8a1bf/1682552272?v=1",
@@ -37,14 +45,33 @@ class _HomePagePacienteState extends State<HomePagePaciente>
       "No estan disponibles",
       "Sin comentarios"
     ];
-    fotosFinalizado = [];
     idNotas = [];
-    nombresFinalizado = [];
-    horasFinalizado = [];
+
+    void handleClick(String value) {
+      switch (value) {
+        case 'Logout':
+          break;
+        case 'Settings':
+          break;
+      }
+    }
 
     TabController tabController = TabController(length: 2, vsync: this);
     return Scaffold(
         appBar: AppBar(
+          actions: <Widget>[
+            PopupMenuButton<String>(
+              onSelected: handleClick,
+              itemBuilder: (BuildContext context) {
+                return {'Logout', 'Settings'}.map((String choice) {
+                  return PopupMenuItem<String>(
+                    value: choice,
+                    child: Text(choice),
+                  );
+                }).toList();
+              },
+            ),
+          ],
           title: Padding(
             padding: const EdgeInsets.only(bottom: 0, top: 20),
             child: Image.asset(

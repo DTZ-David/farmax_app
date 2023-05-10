@@ -21,21 +21,15 @@ List<String> horasFinalizado = [];
 
 class _HomePagePacienteState extends State<HomePagePaciente>
     with TickerProviderStateMixin {
-  var images = {
-    'paciente.png': 'Luz Mendoza',
-    'paciente_2.png': 'Angie Salazar',
-    'psicologo.png': 'Moises Quiroz'
-  };
-
   @override
   Widget build(BuildContext context) {
     nombres = ["Jhohan", "Juan", "Estefani", "Camila"];
     hora = ["8.15 AM", "9.30 AM", "8.15 AM", "9.30 AM"];
     fotos = [
-      "https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg",
-      "https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg",
-      "https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg",
-      "https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg"
+      "https://www.elquindiano.com/upload/article/b202109201119323.jpg",
+      "https://d20ohkaloyme4g.cloudfront.net/img/document_thumbnails/142afe1662fc33b4efa2624591189ff2/thumb_1200_846.png",
+      "https://imgv2-2-f.scribdassets.com/img/document/438633881/original/da09b8a1bf/1682552272?v=1",
+      "https://d20ohkaloyme4g.cloudfront.net/img/document_thumbnails/e4e50e841cff1fe6e1fabb82b56d5e4c/thumb_1200_846.png"
     ];
     notas = [
       "Estan disponibles las pastillas",
@@ -248,8 +242,7 @@ class _CargarCardsState extends State<CargarCards> {
                                               255, 255, 255, 255),
                                           isExpanded: true,
                                           items: <String>[
-                                            "Finalizado",
-                                            "Cancelado",
+                                            "Cancelar",
                                           ].map((String items) {
                                             return DropdownMenuItem(
                                               value: items,

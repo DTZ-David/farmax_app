@@ -3,6 +3,7 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farmax_app/data/services/peticionesCliente.dart';
+import 'package:farmax_app/domain/controller/gestionClientes.dart';
 import 'package:farmax_app/domain/models/cliente.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -35,11 +36,10 @@ class _RegisterStepperState extends State<RegisterStepper> {
   TextEditingController controlapellido = TextEditingController();
   TextEditingController controldireccion = TextEditingController();
   TextEditingController controlemail = TextEditingController();
-
   TextEditingController controlnumero = TextEditingController();
-  //ConsultasControllerCliente controladorCliente = Get.find();
 
   ControlUserAuth controlu = Get.find();
+  ControlUserPerfil controlUserPerfil = Get.find();
 
   _camGaleria(bool op) async {
     XFile? image;
@@ -71,17 +71,22 @@ class _RegisterStepperState extends State<RegisterStepper> {
             onStepContinue: () {
               final isLastStep = currentStep == getSteps().length - 1;
               if (isLastStep) {
-                final cliente = Cliente(
-                    identificacion: controlidentificacion.text,
-                    nombre: controlnombre.text,
-                    apellido: controlapellido.text,
-                    foto: '');
+                var cliente = <String, dynamic>{
+                  "tipoId": tipoId,
+                  "identificacion": controlidentificacion.text,
+                  "nombre": controlnombre.text,
+                  "apellido": controlapellido.text,
+                  "direccion": controldireccion.text,
+                  "email": controlemail.text,
+                  "telefono": controlnumero.text,
+                  "foto": ''
+                };
                 final user = User(
                     email: widget.user,
                     password: widget.password,
                     rol: 'Cliente',
                     id: controlidentificacion.text);
-
+                controlUserPerfil.crearcatalogo(cliente, _image);
                 controlu.crearUser(widget.user, widget.password).then((value) {
                   if (controlu.userValido == null) {
                     Get.snackbar("Usuarios", controlu.mensajesUser,
@@ -105,30 +110,32 @@ class _RegisterStepperState extends State<RegisterStepper> {
             controlsBuilder: (context, ControlsDetails details) {
               final isLastStep = currentStep == getSteps().length - 1;
               return Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    const SizedBox(width: 20),
-                    if (currentStep != 0)
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      const SizedBox(width: 20),
+                      if (currentStep != 0)
+                        Container(
+                          width: 100,
+                          height: 40,
+                          margin: const EdgeInsets.only(left: 10),
+                          child: ElevatedButton(
+                            onPressed: details.onStepCancel,
+                            child: const Text('Atras'),
+                          ),
+                        ),
                       Container(
                         width: 100,
                         height: 40,
-                        margin: const EdgeInsets.only(left: 15),
+                        margin: const EdgeInsets.only(left: 10),
                         child: ElevatedButton(
-                          onPressed: details.onStepCancel,
-                          child: const Text('Atras'),
+                          onPressed: details.onStepContinue,
+                          child: Text(isLastStep ? 'Enviar' : 'Siguiente'),
                         ),
                       ),
-                    Container(
-                      width: 100,
-                      height: 40,
-                      margin: const EdgeInsets.only(left: 15),
-                      child: ElevatedButton(
-                        onPressed: details.onStepContinue,
-                        child: Text(isLastStep ? 'Enviar' : 'Siguiente'),
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               );
             },
@@ -158,21 +165,21 @@ class _RegisterStepperState extends State<RegisterStepper> {
                                 borderRadius: BorderRadius.circular(48),
                                 child: Image.file(
                                   _image,
-                                  width: 100,
-                                  height: 100,
+                                  width: 60,
+                                  height: 60,
                                   fit: BoxFit.fitHeight,
                                 ),
                               )
                             : Container(
                                 decoration: BoxDecoration(
-                                  color: Colors.transparent,
+                                  color: const Color.fromARGB(234, 6, 47, 86),
                                   borderRadius: BorderRadius.circular(48),
                                 ),
-                                width: 100,
-                                height: 100,
+                                width: 60,
+                                height: 60,
                                 child: const Icon(
                                   Icons.camera_alt_outlined,
-                                  color: Colors.black,
+                                  color: Colors.white,
                                 ),
                               ),
                       ),

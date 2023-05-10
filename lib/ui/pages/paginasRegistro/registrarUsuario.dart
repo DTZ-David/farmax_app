@@ -1,9 +1,8 @@
-// ignore_for_file: file_names, prefer_typing_uninitialized_variables
+// ignore_for_file: file_names, prefer_typing_uninitialized_variables, unused_import, unused_local_variable
 
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farmax_app/data/services/peticionesCliente.dart';
-import 'package:farmax_app/domain/controller/control_clienteFirebase.dart';
 import 'package:farmax_app/domain/models/cliente.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

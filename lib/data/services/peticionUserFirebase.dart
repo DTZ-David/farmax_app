@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, duplicate_import, prefer_interpolation_to_compose_strings, avoid_print
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 

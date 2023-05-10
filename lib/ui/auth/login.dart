@@ -1,14 +1,9 @@
-// ignore_for_file: unused_element
-
-import 'dart:async';
+// ignore_for_file: unused_element, unused_field, prefer_final_fields
 
 import 'package:farmax_app/domain/controller/controlUserFirebase.dart';
-import 'package:farmax_app/ui/pages/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../data/services/peticionUserFirebase.dart';
-import '../../domain/controller/control_userFirebase.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});

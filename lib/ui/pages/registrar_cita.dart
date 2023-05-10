@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 class RegistrarCita extends StatefulWidget {
   const RegistrarCita({super.key});
@@ -9,12 +12,25 @@ class RegistrarCita extends StatefulWidget {
 }
 
 class _RegistrarCitaState extends State<RegistrarCita> {
+  var _image;
+  ImagePicker picker = ImagePicker();
   TextEditingController controlCed = TextEditingController();
   TextEditingController controlTel = TextEditingController();
   String dropdownvalue = 'Seleccione...';
 
   var items = ['C.C', 'T.I'];
   var items2 = ['San Martin', 'Novena'];
+  _camGaleria(bool op) async {
+    XFile? image;
+    image = op
+        ? await picker.pickImage(source: ImageSource.camera, imageQuality: 50)
+        : await picker.pickImage(source: ImageSource.gallery, imageQuality: 50);
+
+    setState(() {
+      _image = (image != null) ? File(image.path) : null;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -44,8 +60,17 @@ class _RegistrarCitaState extends State<RegistrarCita> {
                   child: Column(
                     children: [
                       const SizedBox(height: 50),
+                      const Positioned(
+                        top: 120,
+                        child: Text(
+                          "¡Agenda tú turno!",
+                          style: TextStyle(
+                              color: Color.fromARGB(234, 6, 47, 86),
+                              fontSize: 20),
+                        ),
+                      ),
                       SizedBox(
-                        height: 540,
+                        height: 520,
                         width: 330,
                         child: Padding(
                           padding: const EdgeInsets.all(16),
@@ -56,16 +81,6 @@ class _RegistrarCitaState extends State<RegistrarCita> {
                             color: Colors.white,
                             child: Stack(
                               children: [
-                                const Positioned(
-                                  top: 10,
-                                  left: 80,
-                                  child: Text(
-                                    "¡Agenda tú turno!",
-                                    style: TextStyle(
-                                        color: Color.fromARGB(234, 6, 47, 86),
-                                        fontSize: 20),
-                                  ),
-                                ),
                                 const Positioned(
                                   top: 80,
                                   left: 20,
@@ -289,10 +304,47 @@ class _RegistrarCitaState extends State<RegistrarCita> {
                                   ),
                                 ),
                                 Positioned(
-                                    top: 430,
+                                  top: -20,
+                                  left: 100,
+                                  child: GestureDetector(
+                                    onTap: () async {
+                                      _opcioncamara(context);
+                                    },
+                                    child: CircleAvatar(
+                                      radius: 50,
+                                      backgroundColor: Colors.transparent,
+                                      child: _image != null
+                                          ? ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(48),
+                                              child: Image.file(
+                                                _image,
+                                                width: 60,
+                                                height: 60,
+                                                fit: BoxFit.fitHeight,
+                                              ),
+                                            )
+                                          : Container(
+                                              decoration: BoxDecoration(
+                                                color: Colors.transparent,
+                                                borderRadius:
+                                                    BorderRadius.circular(48),
+                                              ),
+                                              width: 60,
+                                              height: 60,
+                                              child: const Icon(
+                                                Icons.camera_alt_outlined,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                    ),
+                                  ),
+                                ),
+                                Positioned(
+                                    top: 440,
                                     left: MediaQuery.of(context).size.width *
                                             0.5 -
-                                        90,
+                                        120,
                                     child: ElevatedButton(
                                       style: ButtonStyle(
                                           backgroundColor:
@@ -322,7 +374,7 @@ class _RegistrarCitaState extends State<RegistrarCita> {
                             ),
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ))),
@@ -355,5 +407,34 @@ class _RegistrarCitaState extends State<RegistrarCita> {
         ],
       ),
     );
+  }
+
+  void _opcioncamara(context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return SafeArea(
+            child: Wrap(
+              children: <Widget>[
+                ListTile(
+                    leading: const Icon(Icons.photo_library),
+                    title: const Text('Imagen de Galeria'),
+                    onTap: () {
+                      _camGaleria(false);
+                      Get.back();
+                      // Navigator.of(context).pop();
+                    }),
+                ListTile(
+                  leading: const Icon(Icons.photo_camera),
+                  title: const Text('Capturar Imagen'),
+                  onTap: () {
+                    _camGaleria(true);
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
+          );
+        });
   }
 }

@@ -1,5 +1,6 @@
 import 'package:farmax_app/ui/pages/main_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class Login extends StatefulWidget {

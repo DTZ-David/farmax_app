@@ -29,7 +29,7 @@ class _HomePagePacienteState extends State<HomePagePaciente>
 
   @override
   Widget build(BuildContext context) {
-    nombres = ["Estefani", "Hector", "Estefani", "Hector"];
+    nombres = ["Jhohan", "Juan", "Estefani", "Camila"];
     hora = ["8.15 AM", "9.30 AM", "8.15 AM", "9.30 AM"];
     fotos = [
       "https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg",
@@ -37,7 +37,12 @@ class _HomePagePacienteState extends State<HomePagePaciente>
       "https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg",
       "https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg"
     ];
-    notas = ["Disponible", "Sin comentarios", "Disponible", "Sin comentarios"];
+    notas = [
+      "Estan disponibles las pastillas",
+      "Sin comentarios",
+      "No estan disponibles",
+      "Sin comentarios"
+    ];
     fotosFinalizado = [];
     idNotas = [];
     nombresFinalizado = [];

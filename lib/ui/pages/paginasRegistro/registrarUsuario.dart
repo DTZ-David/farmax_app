@@ -77,7 +77,7 @@ class _RegisterStepperState extends State<RegisterStepper> {
                   "nombre": controlnombre.text,
                   "apellido": controlapellido.text,
                   "direccion": controldireccion.text,
-                  "email": controlemail.text,
+                  "email": widget.user,
                   "telefono": controlnumero.text,
                   "foto": ''
                 };

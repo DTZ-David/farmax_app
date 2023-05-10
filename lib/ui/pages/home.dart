@@ -298,12 +298,15 @@ class _CargarCardsState extends State<CargarCards> {
                               margin: const EdgeInsets.only(left: 100, top: 10),
                               height: 100,
                               width: 100,
-                              child: Card(
-                                clipBehavior: Clip.hardEdge,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(80)),
-                                elevation: 2,
-                                child: Image.network(fotos.elementAt(index)),
+                              child: GestureDetector(
+                                child: Card(
+                                  clipBehavior: Clip.hardEdge,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(80)),
+                                  elevation: 2,
+                                  child: Image.network(fotos.elementAt(index)),
+                                ),
+                                onTap: () {},
                               ),
                             ),
                           ),

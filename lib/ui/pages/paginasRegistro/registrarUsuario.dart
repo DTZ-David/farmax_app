@@ -1,9 +1,17 @@
 // ignore_for_file: file_names, prefer_typing_uninitialized_variables
 
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:farmax_app/data/services/peticionesCliente.dart';
+import 'package:farmax_app/domain/controller/control_clienteFirebase.dart';
+import 'package:farmax_app/domain/models/cliente.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../../../data/services/peticionUserFirebase.dart';
+import '../../../domain/controller/controlUserFirebase.dart';
+import '../../../domain/models/usuario.dart';
 
 class RegisterStepper extends StatefulWidget {
   final String user;
@@ -30,6 +38,9 @@ class _RegisterStepperState extends State<RegisterStepper> {
   TextEditingController controlemail = TextEditingController();
 
   TextEditingController controlnumero = TextEditingController();
+  //ConsultasControllerCliente controladorCliente = Get.find();
+
+  ControlUserAuth controlu = Get.find();
 
   _camGaleria(bool op) async {
     XFile? image;
@@ -61,7 +72,29 @@ class _RegisterStepperState extends State<RegisterStepper> {
             onStepContinue: () {
               final isLastStep = currentStep == getSteps().length - 1;
               if (isLastStep) {
-                Get.offAllNamed("/mainPage");
+                final cliente = Cliente(
+                    identificacion: controlidentificacion.text,
+                    nombre: controlnombre.text,
+                    apellido: controlapellido.text,
+                    foto: '');
+                final user = User(
+                    email: widget.user,
+                    password: widget.password,
+                    rol: 'Cliente',
+                    id: controlidentificacion.text);
+
+                controlu.crearUser(widget.user, widget.password).then((value) {
+                  if (controlu.userValido == null) {
+                    Get.snackbar("Usuarios", controlu.mensajesUser,
+                        duration: const Duration(seconds: 4),
+                        backgroundColor: Colors.red);
+                  } else {
+                    Get.snackbar("Usuarios", controlu.mensajesUser,
+                        duration: const Duration(seconds: 4),
+                        backgroundColor: Colors.green);
+                    Get.offAllNamed("/mainPage");
+                  }
+                });
               } else {
                 setState(() => currentStep += 1);
               }
@@ -378,18 +411,17 @@ class _RegisterStepperState extends State<RegisterStepper> {
         });
   }
 
-//   Future createUser(Paciente paciente, foto) async {
-//     var url = '';
-//     if (foto != null) {
-//       url = await PeticionesPaciente.cargarfoto(foto, paciente.identificacion);
-//     }
-//     final docUser = FirebaseFirestore.instance
-//         .collection("Pacientes")
-//         .doc(paciente.identificacion);
+  Future createUser(Cliente cliente, foto) async {
+    var url = '';
+    if (foto != null) {
+      url = await PeticionesCliente.cargarfoto(foto, cliente.identificacion);
+    }
+    final docUser = FirebaseFirestore.instance
+        .collection("Clientes")
+        .doc(cliente.identificacion);
 
-//     final json = paciente.toJson();
-//     json['foto'] = url.toString();
-//     await docUser.set(json);
-//   }
-// }
+    final json = cliente.toJson();
+    json['foto'] = url.toString();
+    await docUser.set(json);
+  }
 }

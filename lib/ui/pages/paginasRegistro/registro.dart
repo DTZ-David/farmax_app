@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_final_fields
+// ignore_for_file: prefer_final_fields, unused_field
 
 import 'package:farmax_app/ui/pages/paginasRegistro/registrarUsuario.dart';
 import 'package:flutter/material.dart';

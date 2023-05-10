@@ -12,7 +12,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Clinnic Planner',
+      title: 'Far Max',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           brightness: Brightness.light,

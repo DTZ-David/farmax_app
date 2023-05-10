@@ -1,7 +1,14 @@
+// ignore_for_file: unused_element
+
+import 'dart:async';
+
+import 'package:farmax_app/domain/controller/controlUserFirebase.dart';
 import 'package:farmax_app/ui/pages/main_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+
+import '../../data/services/peticionUserFirebase.dart';
+import '../../domain/controller/control_userFirebase.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -13,7 +20,10 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   TextEditingController controluser = TextEditingController();
   TextEditingController controlpass = TextEditingController();
+  Peticioneslogin controlu = Get.find();
   bool _obscureText = true;
+  late bool _loading = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,32 +120,56 @@ class _LoginState extends State<Login> {
                 height: 40,
                 width: 200,
                 child: ElevatedButton(
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            const Color.fromARGB(250, 6, 68, 108)),
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(18.0),
-                                    side: const BorderSide(
-                                        color:
-                                            Color.fromARGB(250, 6, 68, 108))))),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const <Widget>[
-                        Text("Iniciar Sesion"),
-                      ],
-                    ),
-                    onPressed: () {
-                      Get.to(() => const MainPage(),
-                          transition: Transition.cupertino,
-                          duration: const Duration(seconds: 1));
-                    } //_login(context),
-                    ),
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          const Color.fromARGB(250, 6, 68, 108)),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18.0),
+                              side: const BorderSide(
+                                  color: Color.fromARGB(250, 6, 68, 108))))),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const <Widget>[
+                      Text("Iniciar Sesion"),
+                    ],
+                  ),
+                  onPressed: () => _login(context),
+                ),
               ),
             ]),
           ]),
         ));
+  }
+
+  _login(BuildContext context) {
+    ControlUserAuth controladorUser = Get.find();
+
+    if (controlpass.text.isEmpty || controluser.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          backgroundColor: Color.fromARGB(250, 6, 68, 108),
+          content: Text(
+            'Por favor ingrese su usuario y contraseña para ingresar',
+            style: TextStyle(color: Colors.white),
+          )));
+    } else {
+      setState(() {
+        controladorUser
+            .ingresarUser(controluser.text, controlpass.text)
+            .then((value) {
+          if (controladorUser.userValido == null) {
+            Get.snackbar("Usuarios", controladorUser.mensajesUser,
+                duration: const Duration(seconds: 4),
+                backgroundColor: Colors.red);
+          } else {
+            Get.snackbar("Usuarios", controladorUser.mensajesUser,
+                duration: const Duration(seconds: 4),
+                backgroundColor: Colors.green);
+            Get.toNamed("/mainPage");
+          }
+        });
+      });
+    }
   }
 
   Widget togglePassword() {

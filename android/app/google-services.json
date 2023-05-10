@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "30192961964",
+    "project_id": "farmax-d46cf",
+    "storage_bucket": "farmax-d46cf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:30192961964:android:e5efc086195de7078f9209",
+        "android_client_info": {
+          "package_name": "com.example.farmax_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "30192961964-09spv5bb5t4krtmh1krfgigf04pga1os.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhZUgUbXy11oTTSvxevhtgi71xlAjauDA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "30192961964-09spv5bb5t4krtmh1krfgigf04pga1os.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

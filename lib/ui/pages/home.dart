@@ -1,7 +1,9 @@
 // ignore_for_file: unused_local_variable, prefer_typing_uninitialized_variables
 
+import 'package:farmax_app/ui/auth/login.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:get/get.dart';
 
 class HomePagePaciente extends StatefulWidget {
   const HomePagePaciente({super.key});
@@ -49,88 +51,94 @@ class _HomePagePacienteState extends State<HomePagePaciente>
 
     void handleClick(String value) {
       switch (value) {
-        case 'Logout':
-          break;
-        case 'Settings':
+        case 'Cerrar Sesión':
+          Get.offAllNamed("/login");
           break;
       }
     }
 
     TabController tabController = TabController(length: 2, vsync: this);
-    return Scaffold(
-        appBar: AppBar(
-          actions: <Widget>[
-            PopupMenuButton<String>(
-              onSelected: handleClick,
-              itemBuilder: (BuildContext context) {
-                return {'Logout', 'Settings'}.map((String choice) {
-                  return PopupMenuItem<String>(
-                    value: choice,
-                    child: Text(choice),
-                  );
-                }).toList();
-              },
-            ),
-          ],
-          title: Padding(
-            padding: const EdgeInsets.only(bottom: 0, top: 20),
-            child: Image.asset(
-              "assets/images/logoww1.png",
-              height: 200,
-              width: 300,
-              alignment: Alignment.bottomCenter,
-            ),
-          ),
-          automaticallyImplyLeading: false,
-          centerTitle: true,
-          backgroundColor: const Color.fromARGB(234, 6, 47, 86),
-          elevation: 0.0,
-          shape: const ContinuousRectangleBorder(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(60.0),
-              bottomRight: Radius.circular(60.0),
-            ),
-          ),
-          toolbarHeight: 60,
-        ),
-        body: SingleChildScrollView(
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            const SizedBox(height: 10),
-            Align(
-              alignment: Alignment.center,
-              child: TabBar(
-                  labelPadding: const EdgeInsets.only(left: 20, right: 20),
-                  labelColor: Colors.black,
-                  controller: tabController,
-                  unselectedLabelColor: Colors.grey,
-                  isScrollable: true,
-                  indicatorSize: TabBarIndicatorSize.label,
-                  indicator: CircleTabIndicator(
-                      color: const Color.fromARGB(150, 6, 68, 108), radius: 4),
-                  tabs: const [
-                    Tab(
-                      text: 'Inicio',
-                    ),
-                    Tab(
-                      text: 'Historial',
-                    )
-                  ]),
-            ),
-            const SizedBox(height: 10),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.7,
-              width: double.maxFinite,
-              child: TabBarView(
-                controller: tabController,
-                children: const [
-                  CargarCards(),
-                  CargarCards2(),
-                ],
+    return WillPopScope(
+        onWillPop: () async {
+          return false;
+        },
+        child: Scaffold(
+            appBar: AppBar(
+              actions: <Widget>[
+                PopupMenuButton<String>(
+                  onSelected: handleClick,
+                  itemBuilder: (BuildContext context) {
+                    return {'Cerrar Sesión'}.map((String choice) {
+                      return PopupMenuItem<String>(
+                        value: choice,
+                        child: Text(choice),
+                      );
+                    }).toList();
+                  },
+                ),
+              ],
+              title: Padding(
+                padding: const EdgeInsets.only(bottom: 0, top: 20),
+                child: Image.asset(
+                  "assets/images/logoww1.png",
+                  height: 200,
+                  width: 300,
+                  alignment: Alignment.bottomCenter,
+                ),
               ),
+              automaticallyImplyLeading: false,
+              centerTitle: true,
+              backgroundColor: const Color.fromARGB(234, 6, 47, 86),
+              elevation: 0.0,
+              shape: const ContinuousRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(60.0),
+                  bottomRight: Radius.circular(60.0),
+                ),
+              ),
+              toolbarHeight: 60,
             ),
-          ]),
-        ));
+            body: SingleChildScrollView(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 10),
+                    Align(
+                      alignment: Alignment.center,
+                      child: TabBar(
+                          labelPadding:
+                              const EdgeInsets.only(left: 20, right: 20),
+                          labelColor: Colors.black,
+                          controller: tabController,
+                          unselectedLabelColor: Colors.grey,
+                          isScrollable: true,
+                          indicatorSize: TabBarIndicatorSize.label,
+                          indicator: CircleTabIndicator(
+                              color: const Color.fromARGB(150, 6, 68, 108),
+                              radius: 4),
+                          tabs: const [
+                            Tab(
+                              text: 'Inicio',
+                            ),
+                            Tab(
+                              text: 'Historial',
+                            )
+                          ]),
+                    ),
+                    const SizedBox(height: 10),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.7,
+                      width: double.maxFinite,
+                      child: TabBarView(
+                        controller: tabController,
+                        children: const [
+                          CargarCards(),
+                          CargarCards2(),
+                        ],
+                      ),
+                    ),
+                  ]),
+            )));
   }
 }
 

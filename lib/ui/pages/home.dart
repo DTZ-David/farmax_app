@@ -159,7 +159,7 @@ class CargarCards2 extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               return Container(
                 padding: const EdgeInsets.fromLTRB(20, 30, 10, 10),
-                height: 150,
+                height: 180,
                 width: 300,
                 child: Card(
                     shape: RoundedRectangleBorder(
@@ -184,7 +184,7 @@ class CargarCards2 extends StatelessWidget {
                         ),
                       ),
                       Positioned(
-                        top: 30,
+                        top: 25,
                         right: 35,
                         child: Column(
                           children: [

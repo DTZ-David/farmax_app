@@ -2,7 +2,7 @@ class Asesor {
   final String identificacion;
   final String nombre;
   final String apellido;
-  final List<String> horario;
+  final List horario;
   final String foto;
 
   Asesor(
@@ -29,22 +29,3 @@ class Asesor {
         'foto': foto,
       };
 }
-
-Map<String, dynamic> asesor1 = {
-  'identificacion': "123",
-  'nombre': "Estefani",
-  'apellido': "Rojas",
-  'horario': ["8:00 AM", "8:15 AM", "8:30 AM"],
-  'foto':
-      "https://magazine.caser.es/wp-content/uploads/2020/10/Asesores-comerciales-825x483.jpg",
-};
-
-Map<String, dynamic> asesor2 = {
-  'identificacion': "234",
-  'nombre': "Estefani",
-  'apellido': "Rojas",
-  'horario': ["8:00 AM", "8:15 AM", "8:30 AM"],
-  'foto':
-      "https://magazine.caser.es/wp-content/uploads/2020/10/Asesores-comerciales-825x483.jpg",
-};
-List<Asesor> listaAsesores = [Asesor.crear(asesor1), Asesor.crear(asesor2)];

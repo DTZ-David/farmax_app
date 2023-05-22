@@ -20,18 +20,3 @@ class User {
   Map<String, dynamic> toJson() =>
       {'email': email, 'password': password, 'rol': rol, 'id': id};
 }
-
-Map<String, dynamic> user1 = {
-  'email': "estefani",
-  'password': "password",
-  'rol': "Asesor",
-  'id': "123"
-};
-Map<String, dynamic> user2 = {
-  'email': "hector",
-  'password': "password",
-  'rol': "Cliente",
-  'id': "9909"
-};
-
-List<User> listadoUsuarios = [User.desdeJson(user1), User.desdeJson(user2)];

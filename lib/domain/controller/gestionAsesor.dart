@@ -1,22 +1,15 @@
 // ignore_for_file: file_names
 
+import 'package:farmax_app/domain/models/asesor.dart';
 import 'package:get/get.dart';
-import '../models/asesor.dart';
+import '../../data/services/peticionesAsesorFirebase.dart';
 
 class AsesorController extends GetxController {
-  Rx<List<Asesor>> listaLocal = Rx<List<Asesor>>([]);
-  final contador = 0.obs;
+  final Rxn<List<Asesor>> _asesorFirestore = Rxn<List<Asesor>>();
 
-  @override
-  void onInit() {
-    listaLocal.value = listaAsesores;
-    super.onInit();
+  Future<void> consultaAsesor() async {
+    _asesorFirestore.value = await PeticionesAsesor.consultarGral();
   }
 
-  List<Asesor> get listapublica => listaLocal.value;
-  int get total => contador.value;
-
-  aumentar() {
-    contador.value++;
-  }
+  List<Asesor>? get getAsesorGnral => _asesorFirestore.value;
 }

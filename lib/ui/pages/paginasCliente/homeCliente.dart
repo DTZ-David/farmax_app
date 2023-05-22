@@ -1,15 +1,18 @@
 // ignore_for_file: unused_local_variable, prefer_typing_uninitialized_variables
 
-import 'package:farmax_app/ui/auth/login.dart';
+import 'package:farmax_app/domain/controller/gestionAsesor.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:get/get.dart';
 
-class HomePagePaciente extends StatefulWidget {
-  const HomePagePaciente({super.key});
+import '../../../domain/controller/gestionSedeFirebase.dart';
+
+class HomePageCliente extends StatefulWidget {
+  final String id;
+  const HomePageCliente({super.key, required this.id});
 
   @override
-  State<HomePagePaciente> createState() => _HomePagePacienteState();
+  State<HomePageCliente> createState() => _HomePageClienteState();
 }
 
 List<String> nombres = [];
@@ -21,10 +24,15 @@ List<String> fotosFinalizado = [];
 List<String> nombresFinalizado = [];
 List<String> horasFinalizado = [];
 
-class _HomePagePacienteState extends State<HomePagePaciente>
+class _HomePageClienteState extends State<HomePageCliente>
     with TickerProviderStateMixin {
+  AsesorController asesorController = Get.find();
+  SedeController sedeController = Get.find();
+
   @override
   Widget build(BuildContext context) {
+    asesorController.consultaAsesor().then((value) => null);
+    sedeController.consultaSede().then((value) => null);
     nombres = ["Jhohan", "Juan", "Estefani", "Camila"];
     nombresFinalizado = ["Claudia", "Edna", "Sofia", "Clara"];
     hora = ["3.15 PM", "5.30 PM", "6.15 PM", "6.30 PM"];

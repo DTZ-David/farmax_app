@@ -160,7 +160,7 @@ class _LoginState extends State<Login> {
             Get.snackbar("Usuarios", controladorUser.mensajesUser,
                 duration: const Duration(seconds: 4),
                 backgroundColor: Colors.green);
-            Get.toNamed("/mainPage");
+            Get.toNamed("/mainPageCliente");
           }
         });
       });

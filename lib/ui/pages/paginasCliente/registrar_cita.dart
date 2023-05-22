@@ -1,13 +1,17 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../domain/controller/gestionSedeFirebase.dart';
+
 class RegistrarCita extends StatefulWidget {
-  const RegistrarCita({super.key});
+  final String id;
+  const RegistrarCita({super.key, required this.id});
 
   @override
   State<RegistrarCita> createState() => _RegistrarCitaState();
@@ -19,9 +23,9 @@ class _RegistrarCitaState extends State<RegistrarCita> {
   TextEditingController controlCed = TextEditingController();
   TextEditingController controlTel = TextEditingController();
   String dropdownvalue = 'Seleccione...';
-
+  SedeController sedeController = Get.find();
   var items = ['C.C', 'T.I'];
-  var items2 = ['San Martin', 'Novena'];
+
   _camGaleria(bool op) async {
     XFile? image;
     image = op
@@ -35,12 +39,30 @@ class _RegistrarCitaState extends State<RegistrarCita> {
 
   @override
   Widget build(BuildContext context) {
+    sedeController.consultaSede().then((value) => null);
+    List<String> nombres = [];
+    void obtenerNombresDesdeFirestore() {
+      for (var i = 0; i < sedeController.getAsesorGnral!.length; i++) {
+        nombres.add(sedeController.getAsesorGnral![i].nombre);
+      }
+    }
+
+    List<DropdownMenuItem<String>> generarDropdownItems() {
+      obtenerNombresDesdeFirestore();
+      return nombres.map((nombre) {
+        return DropdownMenuItem<String>(
+          value: nombre,
+          child: Text(nombre),
+        );
+      }).toList();
+    }
+
     return SafeArea(
       child: Stack(
         children: <Widget>[
           WillPopScope(
             onWillPop: () async {
-              Get.offAllNamed("/mainPage");
+              Get.offAllNamed("/mainPageCliente");
               return false;
             },
             child: Scaffold(
@@ -148,54 +170,50 @@ class _RegistrarCitaState extends State<RegistrarCita> {
                                     width: 200,
                                     height: 40,
                                     child: DropdownButtonFormField(
-                                        decoration: InputDecoration(
-                                          contentPadding:
-                                              const EdgeInsets.symmetric(
-                                                  vertical: 7),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            borderSide: const BorderSide(
-                                                color: Colors.white, width: 2),
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            borderSide: const BorderSide(
-                                              color: Colors.grey,
-                                              width: 2,
-                                            ),
+                                      decoration: InputDecoration(
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                                vertical: 7),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          borderSide: const BorderSide(
+                                              color: Colors.white, width: 2),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          borderSide: const BorderSide(
+                                            color: Colors.grey,
+                                            width: 2,
                                           ),
                                         ),
-                                        dropdownColor: Colors.white,
-                                        icon: Container(
-                                          decoration: const BoxDecoration(
-                                            border: Border(
-                                              left: BorderSide(
-                                                  color: Colors.grey, width: 1),
-                                            ),
+                                      ),
+                                      dropdownColor: Colors.white,
+                                      icon: Container(
+                                        decoration: const BoxDecoration(
+                                          border: Border(
+                                            left: BorderSide(
+                                                color: Colors.grey, width: 1),
                                           ),
-                                          child: const Icon(
-                                              Icons.arrow_downward_rounded),
                                         ),
-                                        iconEnabledColor: const Color.fromARGB(
-                                            234, 57, 59, 61), //Icon color
-                                        style: const TextStyle(
-                                            color: Colors.grey, //Font color
-                                            fontSize: 20),
-                                        iconSize: 25,
-                                        isExpanded: true,
-                                        items: items2.map((String items) {
-                                          return DropdownMenuItem(
-                                            value: items,
-                                            child: Text(items),
-                                          );
-                                        }).toList(),
-                                        onChanged: (String? newValue) {
-                                          setState(() {
-                                            dropdownvalue = newValue!;
-                                          });
-                                        }),
+                                        child: const Icon(
+                                            Icons.arrow_downward_rounded),
+                                      ),
+                                      iconEnabledColor: const Color.fromARGB(
+                                          234, 57, 59, 61), //Icon color
+                                      style: const TextStyle(
+                                          color: Colors.grey, //Font color
+                                          fontSize: 20),
+                                      iconSize: 25,
+                                      isExpanded: true,
+                                      items: generarDropdownItems(),
+                                      onChanged: (String? newValue) {
+                                        setState(() {
+                                          dropdownvalue = newValue!;
+                                        });
+                                      },
+                                    ),
                                   ),
                                 ),
                                 Positioned(

@@ -1,8 +1,8 @@
 import 'package:farmax_app/ui/auth/login.dart';
-import 'package:farmax_app/ui/pages/main_page.dart';
+import 'package:farmax_app/ui/pages/paginasCliente/main_pageCliente.dart';
 import 'package:farmax_app/ui/pages/paginasRegistro/registro.dart';
-import 'package:farmax_app/ui/pages/registrar_cita.dart';
-import 'package:farmax_app/ui/pages/registrar_cita_pagina2.dart';
+import 'package:farmax_app/ui/pages/paginasCliente/registrar_cita.dart';
+import 'package:farmax_app/ui/pages/paginasCliente/registrar_cita_pagina2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -22,9 +22,9 @@ class App extends StatelessWidget {
       routes: {
         '/login': (context) => const Login(),
         '/registro': (context) => const Registro(),
-        '/mainPage': (context) => const MainPage(),
-        '/registrarCita': (context) => const RegistrarCita(),
-        '/registrarCitaP2': (context) => const RegistrarCitaPagina2()
+        '/mainPageCliente': (context) => const MainPageCliente(id: ''),
+        '/registrarCitaP2': (context) => const RegistrarCitaPagina2(),
+        //'/mainPageAsesor' : (context) => con
       },
       home: const Login(),
     );

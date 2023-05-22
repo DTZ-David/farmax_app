@@ -17,8 +17,8 @@ class Turno {
   factory Turno.desdeDoc(Map<String, dynamic> data) {
     return Turno(
         idTurno: data['idTurno'] ?? '',
-        idCliente: data['idPaciente'] ?? '',
-        idAsesor: data['idPsicologo'] ?? '',
+        idCliente: data['idCliente'] ?? '',
+        idAsesor: data['idAsesor'] ?? '',
         fecha: data['fecha'] ?? '',
         hora: data['hora'] ?? '',
         estado: data['estado'] ?? '');
@@ -33,13 +33,3 @@ class Turno {
         'estado': estado
       };
 }
-
-Map<String, dynamic> sesion1 = {
-  'idTurno': "1",
-  'idCliente': "9909",
-  'idAsesor': "123",
-  'fecha': "14/03/23",
-  'hora': "8.15 AM",
-  'estado': "Pendiente"
-};
-List<Turno> listadoSesiones = [Turno.desdeDoc(sesion1)];

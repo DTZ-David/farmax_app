@@ -11,6 +11,7 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../../data/services/peticionUserFirebase.dart';
 import '../../../domain/controller/controlUserFirebase.dart';
+import '../../../domain/controller/controlUsuarioFirebase.dart';
 import '../../../domain/models/usuario.dart';
 
 class RegisterStepper extends StatefulWidget {
@@ -40,6 +41,7 @@ class _RegisterStepperState extends State<RegisterStepper> {
 
   ControlUserAuth controlu = Get.find();
   ControlUserPerfil controlUserPerfil = Get.find();
+  UsuarioController controlUsuario = Get.find();
 
   _camGaleria(bool op) async {
     XFile? image;
@@ -81,12 +83,14 @@ class _RegisterStepperState extends State<RegisterStepper> {
                   "telefono": controlnumero.text,
                   "foto": ''
                 };
-                final user = User(
-                    email: widget.user,
-                    password: widget.password,
-                    rol: 'Cliente',
-                    id: controlidentificacion.text);
+                var user = <String, dynamic>{
+                  'email': widget.user,
+                  'password': widget.password,
+                  'rol': 'Cliente',
+                  'id': controlidentificacion.text
+                };
                 controlUserPerfil.crearcatalogo(cliente, _image);
+                controlUsuario.crearcatalogo(user);
                 controlu.crearUser(widget.user, widget.password).then((value) {
                   if (controlu.userValido == null) {
                     Get.snackbar("Usuarios", controlu.mensajesUser,
@@ -96,7 +100,7 @@ class _RegisterStepperState extends State<RegisterStepper> {
                     Get.snackbar("Usuarios", controlu.mensajesUser,
                         duration: const Duration(seconds: 4),
                         backgroundColor: Colors.green);
-                    Get.offAllNamed("/mainPage");
+                    Get.offAllNamed("/mainPageCliente");
                   }
                 });
               } else {

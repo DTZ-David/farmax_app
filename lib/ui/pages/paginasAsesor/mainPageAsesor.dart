@@ -1,16 +1,16 @@
-import 'package:farmax_app/ui/pages/registrar_cita.dart';
+import 'package:farmax_app/ui/pages/paginasAsesor/homeAsesor.dart';
+import 'package:farmax_app/ui/pages/paginasCliente/registrar_cita.dart';
 import 'package:flutter/material.dart';
 
-import 'home.dart';
-
-class MainPage extends StatefulWidget {
-  const MainPage({super.key});
+class MainPageAsesor extends StatefulWidget {
+  final String id;
+  const MainPageAsesor({super.key, required this.id});
 
   @override
-  State<MainPage> createState() => _MainPageState();
+  State<MainPageAsesor> createState() => _MainPageAsesorState();
 }
 
-class _MainPageState extends State<MainPage> {
+class _MainPageAsesorState extends State<MainPageAsesor> {
   int currentIndex = 0;
   void onTap(int index) {
     setState(() {
@@ -20,7 +20,7 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    List pages = [const HomePagePaciente(), const RegistrarCita()];
+    List pages = [const HomePageAsesor(), RegistrarCita(id: widget.id)];
     return Scaffold(
       body: pages[currentIndex],
       bottomNavigationBar: BottomNavigationBar(

@@ -7,8 +7,12 @@ import '../models/turno.dart';
 class TurnoController extends GetxController {
   final Rxn<List<Turno>> _turnoFirestore = Rxn<List<Turno>>();
 
-  Future<void> consultaAsesor() async {
+  Future<void> consultaTurno() async {
     _turnoFirestore.value = await PeticionesTurno.consultarGral();
+  }
+
+  Future<void> crearTurno(Map<String, dynamic> catalogo, foto) async {
+    await PeticionesTurno.crearTurno(catalogo, foto);
   }
 
   List<Turno>? get getAsesorGnral => _turnoFirestore.value;

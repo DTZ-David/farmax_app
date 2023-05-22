@@ -1,12 +1,22 @@
 // ignore_for_file: unnecessary_null_comparison
 
+import 'dart:io';
+
 import 'package:farmax_app/domain/controller/gestionAsesor.dart';
+import 'package:farmax_app/domain/controller/gestionTurnoFirebase.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class RegistrarCitaPagina2 extends StatefulWidget {
-  const RegistrarCitaPagina2({super.key});
+  final String idCliente;
+  final String sede;
+  final File imagenFormula;
+  const RegistrarCitaPagina2(
+      {super.key,
+      required this.sede,
+      required this.imagenFormula,
+      required this.idCliente});
 
   @override
   State<RegistrarCitaPagina2> createState() => _RegistrarCitaPagina2State();
@@ -55,6 +65,7 @@ class _RegistrarCitaPagina2State extends State<RegistrarCitaPagina2> {
   }
 
   AsesorController asesorController = Get.find();
+  TurnoController turnoController = Get.find();
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -302,11 +313,24 @@ class _RegistrarCitaPagina2State extends State<RegistrarCitaPagina2> {
                                               ],
                                             ),
                                             onPressed: () {
+                                              var turno = <String, dynamic>{
+                                                "idTurno": '01',
+                                                "idCliente": widget.idCliente,
+                                                "idAsesor": '1065854795',
+                                                "fecha": selectedDate,
+                                                "hora": dropdownvalue,
+                                                "estado": 'Pendiente',
+                                                "foto": ''
+                                              };
+                                              turnoController.crearTurno(
+                                                  turno, widget.imagenFormula);
+
                                               _mostrarVentanaEmergente(context);
                                               Future.delayed(
                                                   const Duration(seconds: 3),
                                                   () {
-                                                Get.offAllNamed('/mainPage');
+                                                Get.offAllNamed(
+                                                    '/mainPageCliente');
                                               });
                                             },
                                           ))

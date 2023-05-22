@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, unused_local_variable, prefer_interpolation_to_compose_strings, avoid_print
 
 import 'dart:developer';
 import 'package:firebase_storage/firebase_storage.dart' as fs;
@@ -10,7 +10,7 @@ class PeticionesTurno {
   static final fs.FirebaseStorage storage = fs.FirebaseStorage.instance;
   static final FirebaseFirestore _db = FirebaseFirestore.instance;
 
-  static Future<void> crearAsesor(Map<String, dynamic> catalogo, foto) async {
+  static Future<void> crearTurno(Map<String, dynamic> catalogo, foto) async {
     var url = '';
     if (foto != null) {
       url = await cargarfoto(foto, catalogo['idTurno']);
@@ -40,13 +40,13 @@ class PeticionesTurno {
 
   static Future<dynamic> cargarfoto(var foto, var idArt) async {
     final fs.Reference storageReference =
-        fs.FirebaseStorage.instance.ref().child("Turno");
+        fs.FirebaseStorage.instance.ref().child("Turnos");
 
     fs.TaskSnapshot taskSnapshot =
         await storageReference.child(idArt).putFile(foto);
 
     var url = await taskSnapshot.ref.getDownloadURL();
-
+    print('url:' + url.toString());
     return url.toString();
   }
 

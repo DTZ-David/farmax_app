@@ -1,4 +1,4 @@
-// ignore_for_file: unused_local_variable, prefer_typing_uninitialized_variables
+// ignore_for_file: unused_local_variable, prefer_typing_uninitialized_variables, file_names
 
 import 'package:farmax_app/domain/controller/gestionAsesor.dart';
 import 'package:flutter/material.dart';
@@ -126,7 +126,7 @@ class _HomePageClienteState extends State<HomePageCliente>
                               radius: 4),
                           tabs: const [
                             Tab(
-                              text: 'Inicio',
+                              text: 'Inicio Cliente',
                             ),
                             Tab(
                               text: 'Historial',

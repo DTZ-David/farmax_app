@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:farmax_app/ui/pages/paginasAsesor/homeAsesor.dart';
 import 'package:farmax_app/ui/pages/paginasCliente/registrar_cita.dart';
 import 'package:flutter/material.dart';

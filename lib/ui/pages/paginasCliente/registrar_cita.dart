@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
-import 'dart:async';
 import 'dart:io';
 
+import 'package:farmax_app/ui/pages/paginasCliente/registrar_cita_pagina2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -20,8 +20,7 @@ class RegistrarCita extends StatefulWidget {
 class _RegistrarCitaState extends State<RegistrarCita> {
   var _image;
   ImagePicker picker = ImagePicker();
-  TextEditingController controlCed = TextEditingController();
-  TextEditingController controlTel = TextEditingController();
+  String controlSede = '';
   String dropdownvalue = 'Seleccione...';
   SedeController sedeController = Get.find();
   var items = ['C.C', 'T.I'];
@@ -211,6 +210,8 @@ class _RegistrarCitaState extends State<RegistrarCita> {
                                       onChanged: (String? newValue) {
                                         setState(() {
                                           dropdownvalue = newValue!;
+                                          controlSede =
+                                              dropdownvalue.toString();
                                         });
                                       },
                                     ),
@@ -243,7 +244,17 @@ class _RegistrarCitaState extends State<RegistrarCita> {
                                         ],
                                       ),
                                       onPressed: () {
-                                        Get.offAllNamed('/registrarCitaP2');
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                RegistrarCitaPagina2(
+                                              sede: controlSede,
+                                              imagenFormula: _image,
+                                              idCliente: widget.id,
+                                            ),
+                                          ),
+                                        );
                                       },
                                     ))
                               ],
@@ -298,7 +309,6 @@ class _RegistrarCitaState extends State<RegistrarCita> {
                     onTap: () {
                       _camGaleria(false);
                       Get.back();
-                      // Navigator.of(context).pop();
                     }),
                 ListTile(
                   leading: const Icon(Icons.photo_camera),

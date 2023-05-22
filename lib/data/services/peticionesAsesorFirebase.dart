@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable, file_names
+
 import 'dart:developer';
 import 'package:farmax_app/domain/models/asesor.dart';
 import 'package:firebase_storage/firebase_storage.dart' as fs;

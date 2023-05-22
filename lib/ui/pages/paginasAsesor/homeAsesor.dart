@@ -1,4 +1,4 @@
-// ignore_for_file: unused_local_variable, prefer_typing_uninitialized_variables
+// ignore_for_file: unused_local_variable, prefer_typing_uninitialized_variables, file_names
 
 import 'package:farmax_app/domain/controller/gestionAsesor.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +28,7 @@ class _HomePageAsesorState extends State<HomePageAsesor>
   @override
   Widget build(BuildContext context) {
     asesorController.consultaAsesor().then((value) => null);
+
     nombres = ["Jhohan", "Juan", "Estefani", "Camila"];
     nombresFinalizado = ["Claudia", "Edna", "Sofia", "Clara"];
     hora = ["3.15 PM", "5.30 PM", "6.15 PM", "6.30 PM"];
@@ -121,7 +122,7 @@ class _HomePageAsesorState extends State<HomePageAsesor>
                               radius: 4),
                           tabs: const [
                             Tab(
-                              text: 'Inicio',
+                              text: 'Inicio Asesor',
                             ),
                             Tab(
                               text: 'Historial',

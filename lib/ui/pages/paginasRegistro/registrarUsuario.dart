@@ -85,7 +85,6 @@ class _RegisterStepperState extends State<RegisterStepper> {
                 };
                 var user = <String, dynamic>{
                   'email': widget.user,
-                  'password': widget.password,
                   'rol': 'Cliente',
                   'id': controlidentificacion.text
                 };
@@ -394,19 +393,5 @@ class _RegisterStepperState extends State<RegisterStepper> {
             ),
           );
         });
-  }
-
-  Future createUser(Cliente cliente, foto) async {
-    var url = '';
-    if (foto != null) {
-      url = await PeticionesCliente.cargarfoto(foto, cliente.identificacion);
-    }
-    final docUser = FirebaseFirestore.instance
-        .collection("Clientes")
-        .doc(cliente.identificacion);
-
-    final json = cliente.toJson();
-    json['foto'] = url.toString();
-    await docUser.set(json);
   }
 }

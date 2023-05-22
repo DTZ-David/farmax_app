@@ -5,6 +5,7 @@ class Turno {
   final String fecha;
   final String hora;
   final String estado;
+  final String foto;
 
   Turno(
       {required this.idTurno,
@@ -12,7 +13,8 @@ class Turno {
       required this.idAsesor,
       required this.fecha,
       required this.hora,
-      required this.estado});
+      required this.estado,
+      required this.foto});
 
   factory Turno.desdeDoc(Map<String, dynamic> data) {
     return Turno(
@@ -21,7 +23,8 @@ class Turno {
         idAsesor: data['idAsesor'] ?? '',
         fecha: data['fecha'] ?? '',
         hora: data['hora'] ?? '',
-        estado: data['estado'] ?? '');
+        estado: data['estado'] ?? '',
+        foto: data['foto'] ?? '');
   }
 
   Map<String, dynamic> toJson() => {
@@ -30,6 +33,7 @@ class Turno {
         'idAsesor': idAsesor,
         'fecha': fecha,
         'hora': hora,
-        'estado': estado
+        'estado': estado,
+        'foto': foto
       };
 }

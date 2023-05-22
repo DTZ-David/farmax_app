@@ -1,9 +1,15 @@
-// ignore_for_file: unused_element, unused_field, prefer_final_fields
+// ignore_for_file: unused_element, unused_field, prefer_final_fields, unused_local_variable, prefer_typing_uninitialized_variables
+
+import 'dart:async';
 
 import 'package:farmax_app/domain/controller/controlUserFirebase.dart';
+import 'package:farmax_app/domain/controller/controlUsuarioFirebase.dart';
+import 'package:farmax_app/ui/pages/paginasAsesor/mainPageAsesor.dart';
+import 'package:farmax_app/ui/pages/paginasCliente/main_pageCliente.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../data/services/peticionUserFirebase.dart';
+import '../../data/services/peticionesUsuarioFirebase.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -16,6 +22,8 @@ class _LoginState extends State<Login> {
   TextEditingController controluser = TextEditingController();
   TextEditingController controlpass = TextEditingController();
   Peticioneslogin controlu = Get.find();
+  PeticionesUser controlUsuario = Get.find();
+  UsuarioController usuarioController = Get.find();
   bool _obscureText = true;
   late bool _loading = false;
 
@@ -139,7 +147,9 @@ class _LoginState extends State<Login> {
 
   _login(BuildContext context) {
     ControlUserAuth controladorUser = Get.find();
+    usuarioController.consultaUsuario().then((value) => null);
 
+    var id2;
     if (controlpass.text.isEmpty || controluser.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           backgroundColor: Color.fromARGB(250, 6, 68, 108),
@@ -157,10 +167,34 @@ class _LoginState extends State<Login> {
                 duration: const Duration(seconds: 4),
                 backgroundColor: Colors.red);
           } else {
-            Get.snackbar("Usuarios", controladorUser.mensajesUser,
-                duration: const Duration(seconds: 4),
-                backgroundColor: Colors.green);
-            Get.toNamed("/mainPageCliente");
+            final miTimer = Timer(const Duration(seconds: 3), () {
+              for (var i = 0;
+                  i < usuarioController.getUsuarioGral!.length;
+                  i++) {
+                if (usuarioController.getUsuarioGral![i].email ==
+                    controluser.text) {
+                  if (usuarioController.getUsuarioGral![i].rol == 'Cliente') {
+                    id2 = usuarioController.getUsuarioGral![i].id;
+
+                    Get.snackbar("Usuarios", controladorUser.mensajesUser,
+                        duration: const Duration(seconds: 4),
+                        backgroundColor: Colors.green);
+                    Get.to(() => MainPageCliente(id: id2),
+                        transition: Transition.cupertino,
+                        duration: const Duration(seconds: 1));
+                  } else {
+                    id2 = usuarioController.getUsuarioGral![i].id;
+
+                    Get.snackbar("Usuarios", controladorUser.mensajesUser,
+                        duration: const Duration(seconds: 4),
+                        backgroundColor: Colors.green);
+                    Get.to(() => MainPageAsesor(id: id2),
+                        transition: Transition.cupertino,
+                        duration: const Duration(seconds: 1));
+                  }
+                }
+              }
+            });
           }
         });
       });

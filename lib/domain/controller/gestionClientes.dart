@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:farmax_app/data/services/peticionesCliente.dart';
 import 'package:get/get.dart';
 

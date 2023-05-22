@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:farmax_app/ui/pages/paginasCliente/homeCliente.dart';
 import 'package:farmax_app/ui/pages/paginasCliente/registrar_cita.dart';
 import 'package:flutter/material.dart';
@@ -20,10 +22,7 @@ class _MainPageClienteState extends State<MainPageCliente> {
 
   @override
   Widget build(BuildContext context) {
-    List pages = [
-      const HomePageCliente(id: '1065854795'),
-      const RegistrarCita(id: '1065854795')
-    ];
+    List pages = [HomePageCliente(id: widget.id), RegistrarCita(id: widget.id)];
     return Scaffold(
       body: pages[currentIndex],
       bottomNavigationBar: BottomNavigationBar(

@@ -1,8 +1,10 @@
 import 'package:farmax_app/data/services/peticionUserFirebase.dart';
+import 'package:farmax_app/data/services/peticionesUsuarioFirebase.dart';
 import 'package:farmax_app/domain/controller/controlUserFirebase.dart';
 import 'package:farmax_app/domain/controller/controlUsuarioFirebase.dart';
 import 'package:farmax_app/domain/controller/gestionAsesor.dart';
 import 'package:farmax_app/domain/controller/gestionSedeFirebase.dart';
+import 'package:farmax_app/domain/controller/gestionTurnoFirebase.dart';
 import 'package:farmax_app/ui/app.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -18,5 +20,7 @@ Future<void> main() async {
   Get.put(Peticioneslogin());
   Get.put(UsuarioController());
   Get.put(SedeController());
+  Get.put(PeticionesUser());
+  Get.put(TurnoController());
   runApp(const App());
 }

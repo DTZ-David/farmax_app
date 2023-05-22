@@ -14,7 +14,6 @@ import 'domain/controller/gestionClientes.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  Get.put(ControlUserPerfil());
   Get.put(AsesorController());
   Get.put(ControlUserAuth());
   Get.put(Peticioneslogin());
@@ -22,5 +21,6 @@ Future<void> main() async {
   Get.put(SedeController());
   Get.put(PeticionesUser());
   Get.put(TurnoController());
+  Get.put(ClienteController());
   runApp(const App());
 }

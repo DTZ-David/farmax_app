@@ -1,7 +1,9 @@
 // ignore_for_file: avoid_print, prefer_interpolation_to_compose_strings, file_names
 
 import 'dart:async';
+import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:farmax_app/domain/models/cliente.dart';
 import 'package:firebase_storage/firebase_storage.dart' as fs;
 
 class PeticionesCliente {
@@ -23,6 +25,21 @@ class PeticionesCliente {
       print(e);
     });
     //return true;
+  }
+
+  static Future<List<Cliente>> consultarGral() async {
+    List<Cliente> lista = [];
+
+    QuerySnapshot<Map<String, dynamic>> respuesta =
+        await _db.collection("Clientes").get();
+
+    for (var doc in respuesta.docs) {
+      log(doc.data().toString());
+      Cliente cliente = Cliente.crear(doc.data());
+      lista.add(cliente);
+    }
+
+    return lista;
   }
 
   static Future<dynamic> cargarfoto(var foto, var idArt) async {

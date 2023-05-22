@@ -4,9 +4,12 @@ import 'dart:io';
 
 import 'package:farmax_app/domain/controller/gestionAsesor.dart';
 import 'package:farmax_app/domain/controller/gestionTurnoFirebase.dart';
+import 'package:farmax_app/ui/pages/paginasAsesor/homeAsesor.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+
+import 'main_pageCliente.dart';
 
 class RegistrarCitaPagina2 extends StatefulWidget {
   final String idCliente;
@@ -27,6 +30,8 @@ DateTime selectedDate = DateTime.now();
 class _RegistrarCitaPagina2State extends State<RegistrarCitaPagina2> {
   String dropdownvalue = 'Seleccione...';
 
+  AsesorController asesorController = Get.find();
+  TurnoController turnoController = Get.find();
   void _mostrarVentanaEmergente(BuildContext context) {
     showDialog(
       context: context,
@@ -53,21 +58,29 @@ class _RegistrarCitaPagina2State extends State<RegistrarCitaPagina2> {
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime.now(),
-        lastDate: DateTime(2101));
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2101),
+    );
     if (picked != null && picked != selectedDate) {
       setState(() {
-        selectedDate = picked;
+        selectedDate = DateTime(picked.year, picked.month,
+            picked.day); // Aquí se guarda solo la fecha sin la hora
       });
     }
   }
 
-  AsesorController asesorController = Get.find();
-  TurnoController turnoController = Get.find();
   @override
   Widget build(BuildContext context) {
+    var id = 0;
+    turnoController.consultaTurno().then((value) => null);
+    void cargarId() {
+      for (var i = 1; i <= turnoController.getTurnoGnral!.length; i++) {
+        id = i + 1;
+      }
+    }
+
     return WillPopScope(
       onWillPop: () async {
         Get.offAllNamed("/registrarCita");
@@ -313,25 +326,60 @@ class _RegistrarCitaPagina2State extends State<RegistrarCitaPagina2> {
                                               ],
                                             ),
                                             onPressed: () {
-                                              var turno = <String, dynamic>{
-                                                "idTurno": '01',
-                                                "idCliente": widget.idCliente,
-                                                "idAsesor": '1065854795',
-                                                "fecha": selectedDate,
-                                                "hora": dropdownvalue,
-                                                "estado": 'Pendiente',
-                                                "foto": ''
-                                              };
-                                              turnoController.crearTurno(
-                                                  turno, widget.imagenFormula);
+                                              if (dropdownvalue ==
+                                                  "Seleccione...") {
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                        const SnackBar(
+                                                            backgroundColor:
+                                                                Color.fromARGB(
+                                                                    250,
+                                                                    6,
+                                                                    68,
+                                                                    108),
+                                                            content: Text(
+                                                              'Por favor seleccione la hora',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .white),
+                                                            )));
+                                              } else {
+                                                cargarId();
+                                                var texto =
+                                                    selectedDate.toString();
+                                                var turno = <String, dynamic>{
+                                                  "idTurno": id.toString(),
+                                                  "idCliente": widget.idCliente,
+                                                  "idAsesor": '1065854795',
+                                                  "fecha":
+                                                      texto.substring(0, 10),
+                                                  "hora": dropdownvalue,
+                                                  "estado": 'Pendiente',
+                                                  "foto": '',
+                                                  "descripcion":
+                                                      'Sin comentarios'
+                                                };
+                                                print(
+                                                    '0-=======================================================');
+                                                print(selectedDate.toString());
+                                                turnoController.crearTurno(
+                                                    turno,
+                                                    widget.imagenFormula);
 
-                                              _mostrarVentanaEmergente(context);
-                                              Future.delayed(
-                                                  const Duration(seconds: 3),
-                                                  () {
-                                                Get.offAllNamed(
-                                                    '/mainPageCliente');
-                                              });
+                                                _mostrarVentanaEmergente(
+                                                    context);
+                                                Future.delayed(
+                                                    const Duration(seconds: 3),
+                                                    () {
+                                                  Get.to(
+                                                      () => MainPageCliente(
+                                                          id: widget.idCliente),
+                                                      transition:
+                                                          Transition.cupertino,
+                                                      duration: const Duration(
+                                                          seconds: 1));
+                                                });
+                                              }
                                             },
                                           ))
                                     ],

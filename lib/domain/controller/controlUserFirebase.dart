@@ -24,11 +24,11 @@ class ControlUserAuth extends GetxController {
 
   Future<void> controlUser(dynamic respuesta) async {
     if (respuesta == null) {
-      _mensaje.value = "No Se Completo la Consulta";
+      _mensaje.value = "No se completo la consulta";
     } else if (respuesta == "1" || respuesta == "2") {
-      _mensaje.value = "No Se Completo la Consulta";
+      _mensaje.value = "No se completo la consulta";
     } else {
-      _mensaje.value = "Proceso Realizado Correctamente";
+      _mensaje.value = "Proceso realizado correctamente";
       _usuario.value = respuesta;
     }
   }

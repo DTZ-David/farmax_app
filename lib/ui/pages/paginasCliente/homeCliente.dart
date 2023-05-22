@@ -1,10 +1,14 @@
 // ignore_for_file: unused_local_variable, prefer_typing_uninitialized_variables, file_names
 
+import 'dart:async';
+
 import 'package:farmax_app/domain/controller/gestionAsesor.dart';
+import 'package:farmax_app/domain/controller/gestionTurnoFirebase.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:get/get.dart';
 
+import '../../../domain/controller/gestionClientes.dart';
 import '../../../domain/controller/gestionSedeFirebase.dart';
 
 class HomePageCliente extends StatefulWidget {
@@ -19,6 +23,7 @@ List<String> nombres = [];
 List<String> hora = [];
 List<String> notas = [];
 List<String> fotos = [];
+List<String> fecha = [];
 List<String> idNotas = [];
 List<String> fotosFinalizado = [];
 List<String> nombresFinalizado = [];
@@ -28,33 +33,42 @@ class _HomePageClienteState extends State<HomePageCliente>
     with TickerProviderStateMixin {
   AsesorController asesorController = Get.find();
   SedeController sedeController = Get.find();
+  ClienteController clienteController = Get.find();
+  TurnoController turnoController = Get.find();
 
   @override
   Widget build(BuildContext context) {
+    nombres = [];
+    hora = [];
+    fotos = [];
+    notas = [];
+    fecha = [];
+    fotosFinalizado = [];
+    idNotas = [];
+    nombresFinalizado = [];
+    horasFinalizado = [];
     asesorController.consultaAsesor().then((value) => null);
     sedeController.consultaSede().then((value) => null);
-    nombres = ["Jhohan", "Juan", "Estefani", "Camila"];
-    nombresFinalizado = ["Claudia", "Edna", "Sofia", "Clara"];
-    hora = ["3.15 PM", "5.30 PM", "6.15 PM", "6.30 PM"];
-    horasFinalizado = ["8.15 AM", "9.30 AM", "8.15 AM", "9.30 AM"];
-    fotos = [
-      "https://www.elquindiano.com/upload/article/b202109201119323.jpg",
-      "https://d20ohkaloyme4g.cloudfront.net/img/document_thumbnails/142afe1662fc33b4efa2624591189ff2/thumb_1200_846.png",
-      "https://imgv2-2-f.scribdassets.com/img/document/438633881/original/da09b8a1bf/1682552272?v=1",
-      "https://d20ohkaloyme4g.cloudfront.net/img/document_thumbnails/e4e50e841cff1fe6e1fabb82b56d5e4c/thumb_1200_846.png"
-    ];
-    fotosFinalizado = [
-      "https://www.elquindiano.com/upload/article/b202109201119323.jpg",
-      "https://d20ohkaloyme4g.cloudfront.net/img/document_thumbnails/142afe1662fc33b4efa2624591189ff2/thumb_1200_846.png",
-      "https://imgv2-2-f.scribdassets.com/img/document/438633881/original/da09b8a1bf/1682552272?v=1",
-      "https://d20ohkaloyme4g.cloudfront.net/img/document_thumbnails/e4e50e841cff1fe6e1fabb82b56d5e4c/thumb_1200_846.png"
-    ];
-    notas = [
-      "Estan disponibles las pastillas",
-      "Sin comentarios",
-      "No estan disponibles",
-      "Sin comentarios"
-    ];
+    clienteController.consultaCliente().then((value) => null);
+    turnoController.consultaTurno().then((value) => null);
+    final miTimer = Timer(const Duration(seconds: 3), () {
+      for (var i = 0; i < turnoController.getTurnoGnral!.length; i++) {
+        if (widget.id == turnoController.getTurnoGnral![i].idCliente) {
+          for (var j = 0; j < clienteController.getClienteGnral!.length; j++) {
+            if (clienteController.getClienteGnral![j].identificacion ==
+                    turnoController.getTurnoGnral![i].idCliente &&
+                turnoController.getTurnoGnral![i].estado == 'Pendiente') {
+              nombres.add(clienteController.getClienteGnral![j].nombre);
+              hora.add(turnoController.getTurnoGnral![i].hora);
+              fecha.add(turnoController.getTurnoGnral![i].fecha);
+              notas.add(turnoController.getTurnoGnral![i].descripcion);
+              fotos.add(turnoController.getTurnoGnral![j].foto);
+              idNotas.add(turnoController.getTurnoGnral![i].idTurno);
+            }
+          }
+        }
+      }
+    });
     idNotas = [];
 
     void handleClick(String value) {
@@ -396,10 +410,14 @@ class _CargarCardsState extends State<CargarCards> {
                             ),
                           ),
                           Positioned(
-                            top: 20,
+                            top: 60,
                             right: 35,
                             child: Column(
                               children: [
+                                Text(
+                                  fecha.elementAt(index),
+                                  style: const TextStyle(fontSize: 20),
+                                ),
                                 Text(
                                   hora.elementAt(index),
                                   style: const TextStyle(fontSize: 20),
@@ -412,7 +430,7 @@ class _CargarCardsState extends State<CargarCards> {
                             ),
                           ),
                           Positioned(
-                            top: 100,
+                            top: 130,
                             left: 29,
                             child: Column(
                               children: [

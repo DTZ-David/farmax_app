@@ -40,7 +40,7 @@ class _RegisterStepperState extends State<RegisterStepper> {
   TextEditingController controlnumero = TextEditingController();
 
   ControlUserAuth controlu = Get.find();
-  ControlUserPerfil controlUserPerfil = Get.find();
+  ClienteController controlUserPerfil = Get.find();
   UsuarioController controlUsuario = Get.find();
 
   _camGaleria(bool op) async {
@@ -92,14 +92,14 @@ class _RegisterStepperState extends State<RegisterStepper> {
                 controlUsuario.crearcatalogo(user);
                 controlu.crearUser(widget.user, widget.password).then((value) {
                   if (controlu.userValido == null) {
-                    Get.snackbar("Usuarios", controlu.mensajesUser,
+                    Get.snackbar(widget.user, controlu.mensajesUser,
                         duration: const Duration(seconds: 4),
                         backgroundColor: Colors.red);
                   } else {
-                    Get.snackbar("Usuarios", controlu.mensajesUser,
+                    Get.snackbar(widget.user, controlu.mensajesUser,
                         duration: const Duration(seconds: 4),
                         backgroundColor: Colors.green);
-                    Get.offAllNamed("/mainPageCliente");
+                    Get.offAllNamed("/login");
                   }
                 });
               } else {

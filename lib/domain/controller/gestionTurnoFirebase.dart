@@ -15,5 +15,5 @@ class TurnoController extends GetxController {
     await PeticionesTurno.crearTurno(catalogo, foto);
   }
 
-  List<Turno>? get getAsesorGnral => _turnoFirestore.value;
+  List<Turno>? get getTurnoGnral => _turnoFirestore.value;
 }

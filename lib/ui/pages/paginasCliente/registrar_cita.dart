@@ -219,44 +219,54 @@ class _RegistrarCitaState extends State<RegistrarCita> {
                                 ),
                                 Positioned(
                                     top: 380,
-                                    left: MediaQuery.of(context).size.width *
-                                            0.5 -
-                                        85,
+                                    left:
+                                        MediaQuery.of(context).size.width * 0.5 -
+                                            85,
                                     child: ElevatedButton(
-                                      style: ButtonStyle(
-                                          backgroundColor:
-                                              MaterialStateProperty.all<Color>(
-                                                  const Color.fromARGB(
-                                                      250, 6, 68, 108)),
-                                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                              RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          18.0),
-                                                  side: const BorderSide(
-                                                      color:
-                                                          Color.fromARGB(250, 6, 68, 108))))),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: const <Widget>[
-                                          Text("Siguiente"),
-                                        ],
-                                      ),
-                                      onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                RegistrarCitaPagina2(
-                                              sede: controlSede,
-                                              imagenFormula: _image,
-                                              idCliente: widget.id,
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    ))
+                                        style: ButtonStyle(
+                                            backgroundColor:
+                                                MaterialStateProperty.all<Color>(
+                                                    const Color.fromARGB(
+                                                        250, 6, 68, 108)),
+                                            shape: MaterialStateProperty.all<
+                                                    RoundedRectangleBorder>(
+                                                RoundedRectangleBorder(
+                                                    borderRadius: BorderRadius.circular(18.0),
+                                                    side: const BorderSide(color: Color.fromARGB(250, 6, 68, 108))))),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: const <Widget>[
+                                            Text("Siguiente"),
+                                          ],
+                                        ),
+                                        onPressed: () {
+                                          if (_image == null ||
+                                              controlSede == '') {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(const SnackBar(
+                                                    backgroundColor:
+                                                        Color.fromARGB(
+                                                            250, 6, 68, 108),
+                                                    content: Text(
+                                                      'Por favor suba la foto de su formula y/o seleccione la sede',
+                                                      style: TextStyle(
+                                                          color: Colors.white),
+                                                    )));
+                                          } else {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    RegistrarCitaPagina2(
+                                                  sede: controlSede,
+                                                  imagenFormula: _image,
+                                                  idCliente: widget.id,
+                                                ),
+                                              ),
+                                            );
+                                          }
+                                        }))
                               ],
                             ),
                           ),

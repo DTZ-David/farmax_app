@@ -163,7 +163,7 @@ class _LoginState extends State<Login> {
             .ingresarUser(controluser.text, controlpass.text)
             .then((value) {
           if (controladorUser.userValido == null) {
-            Get.snackbar("Usuarios", controladorUser.mensajesUser,
+            Get.snackbar(controluser.text, controladorUser.mensajesUser,
                 duration: const Duration(seconds: 4),
                 backgroundColor: Colors.red);
           } else {
@@ -176,7 +176,7 @@ class _LoginState extends State<Login> {
                   if (usuarioController.getUsuarioGral![i].rol == 'Cliente') {
                     id2 = usuarioController.getUsuarioGral![i].id;
 
-                    Get.snackbar("Usuarios", controladorUser.mensajesUser,
+                    Get.snackbar(controluser.text, controladorUser.mensajesUser,
                         duration: const Duration(seconds: 4),
                         backgroundColor: Colors.green);
                     Get.to(() => MainPageCliente(id: id2),
@@ -185,7 +185,7 @@ class _LoginState extends State<Login> {
                   } else {
                     id2 = usuarioController.getUsuarioGral![i].id;
 
-                    Get.snackbar("Usuarios", controladorUser.mensajesUser,
+                    Get.snackbar(controluser.text, controladorUser.mensajesUser,
                         duration: const Duration(seconds: 4),
                         backgroundColor: Colors.green);
                     Get.to(() => MainPageAsesor(id: id2),

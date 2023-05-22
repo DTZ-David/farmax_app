@@ -19,7 +19,7 @@ class PeticionesTurno {
     catalogo['foto'] = url.toString();
 
     await _db
-        .collection('Turno')
+        .collection('Turnos')
         .doc(catalogo['idTurno'])
         .set(catalogo)
         .catchError((e) {});
@@ -32,7 +32,7 @@ class PeticionesTurno {
       url = await cargarfoto(foto, turno.idTurno);
     }
     final docUser =
-        FirebaseFirestore.instance.collection("Turno").doc(turno.idTurno);
+        FirebaseFirestore.instance.collection("Turnos").doc(turno.idTurno);
 
     final json = turno.toJson();
     await docUser.set(json);
@@ -52,14 +52,14 @@ class PeticionesTurno {
 
   static Future<void> actualizarArticulo(
       String id, Map<String, dynamic> catalogo) async {
-    await _db.collection('Turno').doc(id).update(catalogo).catchError((e) {
+    await _db.collection('Turnos').doc(id).update(catalogo).catchError((e) {
       log(e);
     });
     //return true;
   }
 
   static Future<void> eliminarcatalogo(String id) async {
-    await _db.collection('Turno').doc(id).delete().catchError((e) {
+    await _db.collection('Turnos').doc(id).delete().catchError((e) {
       log(e);
     });
     //return true;
@@ -69,7 +69,7 @@ class PeticionesTurno {
     List<Turno> lista = [];
 
     QuerySnapshot<Map<String, dynamic>> respuesta =
-        await _db.collection("Turno").get();
+        await _db.collection("Turnos").get();
 
     for (var doc in respuesta.docs) {
       log(doc.data().toString());
@@ -82,7 +82,7 @@ class PeticionesTurno {
 
   static Future<List<Turno>> consultarGralUsuarios(String id) async {
     List<Turno> lista = [];
-    await _db.collection("Turno").get().then((respuesta) {
+    await _db.collection("Turnos").get().then((respuesta) {
       for (var doc in respuesta.docs) {
         log(doc.data().toString());
         lista.add(Turno.desdeDoc(doc.data()));

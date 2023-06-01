@@ -18,7 +18,7 @@ class PeticionesAsesor {
     catalogo['foto'] = url.toString();
 
     await _db
-        .collection('Psicologos')
+        .collection('Asesor')
         .doc(catalogo['apellido'])
         .set(catalogo)
         .catchError((e) {});
@@ -28,11 +28,10 @@ class PeticionesAsesor {
   Future createUser(Asesor asesor, foto) async {
     var url = '';
     if (foto != null) {
-      url = await cargarfoto(foto, asesor.identificacion);
+      url = await cargarfoto(foto, asesor.id);
     }
-    final docUser = FirebaseFirestore.instance
-        .collection("Psicologos")
-        .doc(asesor.identificacion);
+    final docUser =
+        FirebaseFirestore.instance.collection("Asesor").doc(asesor.id);
 
     final json = asesor.toJson();
     await docUser.set(json);

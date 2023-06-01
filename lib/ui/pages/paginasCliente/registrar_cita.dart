@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../domain/controller/gestionAsesor.dart';
 import '../../../domain/controller/gestionSedeFirebase.dart';
 
 class RegistrarCita extends StatefulWidget {
@@ -22,8 +23,13 @@ class _RegistrarCitaState extends State<RegistrarCita> {
   ImagePicker picker = ImagePicker();
   String controlSede = '';
   String dropdownvalue = 'Seleccione...';
+  String? idSeleccionado;
   SedeController sedeController = Get.find();
+  AsesorController asesorController = Get.find();
   var items = ['C.C', 'T.I'];
+  List<String> nombreAsesor = [];
+  List<String> apellidoAsesor = [];
+  List<String> fotoAsesor = [];
 
   _camGaleria(bool op) async {
     XFile? image;
@@ -39,10 +45,34 @@ class _RegistrarCitaState extends State<RegistrarCita> {
   @override
   Widget build(BuildContext context) {
     sedeController.consultaSede().then((value) => null);
+    asesorController.consultaAsesor().then((value) => null);
     List<String> nombres = [];
+    String id = '';
+
     void obtenerNombresDesdeFirestore() {
       for (var i = 0; i < sedeController.getAsesorGnral!.length; i++) {
         nombres.add(sedeController.getAsesorGnral![i].nombre);
+      }
+    }
+
+    void cargarId() {
+      for (var i = 0; i < sedeController.getAsesorGnral!.length; i++) {
+        if (nombres[i] == dropdownvalue) {
+          id = sedeController.getAsesorGnral![i].id;
+        }
+      }
+    }
+
+    void cargarAsesores() {
+      nombreAsesor = [];
+      apellidoAsesor = [];
+      fotoAsesor = [];
+      for (var i = 0; i < sedeController.getAsesorGnral!.length; i++) {
+        if (asesorController.getAsesorGnral![i].idSede == id) {
+          nombreAsesor.add(asesorController.getAsesorGnral![i].nombre);
+          apellidoAsesor.add(asesorController.getAsesorGnral![i].apellido);
+          fotoAsesor.add(asesorController.getAsesorGnral![i].foto);
+        }
       }
     }
 
@@ -210,9 +240,10 @@ class _RegistrarCitaState extends State<RegistrarCita> {
                                       onChanged: (String? newValue) {
                                         setState(() {
                                           dropdownvalue = newValue!;
-                                          controlSede =
-                                              dropdownvalue.toString();
+                                          controlSede = dropdownvalue;
                                         });
+                                        cargarId();
+                                        cargarAsesores();
                                       },
                                     ),
                                   ),
@@ -259,7 +290,11 @@ class _RegistrarCitaState extends State<RegistrarCita> {
                                               MaterialPageRoute(
                                                 builder: (context) =>
                                                     RegistrarCitaPagina2(
-                                                  sede: controlSede,
+                                                  nombreAsesor: nombreAsesor,
+                                                  apellidoAsesor:
+                                                      apellidoAsesor,
+                                                  fotoAsesor: fotoAsesor,
+                                                  sede: id,
                                                   imagenFormula: _image,
                                                   idCliente: widget.id,
                                                 ),

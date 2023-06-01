@@ -50,9 +50,21 @@ class PeticionesTurno {
     return url.toString();
   }
 
-  static Future<void> actualizarArticulo(
-      String id, Map<String, dynamic> catalogo) async {
-    await _db.collection('Turnos').doc(id).update(catalogo).catchError((e) {
+  static Future<void> actualizarEstado(String id, String estado) async {
+    await _db
+        .collection('Turnos')
+        .doc(id)
+        .update({'estado': estado}).catchError((e) {
+      log(e);
+    });
+    //return true;
+  }
+
+  static Future<void> actualizarDescripcion(String id, String estado) async {
+    await _db
+        .collection('Turnos')
+        .doc(id)
+        .update({'descripcion': estado}).catchError((e) {
       log(e);
     });
     //return true;

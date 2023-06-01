@@ -1,18 +1,18 @@
 class Sede {
-  final String idSede;
+  final String id;
   final String nombre;
   final List idAsesor;
 
-  Sede({required this.idSede, required this.nombre, required this.idAsesor});
+  Sede({required this.id, required this.nombre, required this.idAsesor});
 
   factory Sede.desdeDoc(Map<String, dynamic> data) {
     return Sede(
-      idSede: data['idSede'] ?? '',
+      id: data['id'] ?? '',
       nombre: data['nombre'] ?? '',
       idAsesor: List.from(data['idAsesor'] ?? []),
     );
   }
 
   Map<String, dynamic> toJson() =>
-      {'idSede': idSede, 'nombre': nombre, 'idAsesor': idAsesor};
+      {'idSede': id, 'nombre': nombre, 'idAsesor': idAsesor};
 }

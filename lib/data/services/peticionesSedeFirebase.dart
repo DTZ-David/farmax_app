@@ -46,14 +46,14 @@ class PeticionesSede {
 
   static Future<void> actualizarcatalogo(
       String id, Map<String, dynamic> catalogo) async {
-    await _db.collection('idSede').doc(id).update(catalogo).catchError((e) {
+    await _db.collection('id').doc(id).update(catalogo).catchError((e) {
       print(e);
     });
     //return true;
   }
 
   static Future<void> eliminarcatalogo(String id) async {
-    await _db.collection('idSede').doc(id).delete().catchError((e) {
+    await _db.collection('id').doc(id).delete().catchError((e) {
       print(e);
     });
     //return true;

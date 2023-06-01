@@ -2,6 +2,7 @@
 
 import 'dart:async';
 
+import 'package:farmax_app/data/services/peticionesTurnoFirebase.dart';
 import 'package:farmax_app/domain/controller/gestionAsesor.dart';
 import 'package:farmax_app/domain/controller/gestionTurnoFirebase.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +26,7 @@ List<String> notas = [];
 List<String> fotos = [];
 List<String> fecha = [];
 List<String> idNotas = [];
+List<String> idSesion = [];
 List<String> fotosFinalizado = [];
 List<String> nombresFinalizado = [];
 List<String> horasFinalizado = [];
@@ -43,14 +45,16 @@ class _HomePageClienteState extends State<HomePageCliente>
     fotos = [];
     notas = [];
     fecha = [];
-    fotosFinalizado = [];
+
     idNotas = [];
+    fotosFinalizado = [];
     nombresFinalizado = [];
     horasFinalizado = [];
     asesorController.consultaAsesor().then((value) => null);
     sedeController.consultaSede().then((value) => null);
     clienteController.consultaCliente().then((value) => null);
     turnoController.consultaTurno().then((value) => null);
+    void ModificarPendientesVencidos() {}
     final miTimer = Timer(const Duration(seconds: 3), () {
       for (var i = 0; i < turnoController.getTurnoGnral!.length; i++) {
         if (widget.id == turnoController.getTurnoGnral![i].idCliente) {
@@ -62,8 +66,17 @@ class _HomePageClienteState extends State<HomePageCliente>
               hora.add(turnoController.getTurnoGnral![i].hora);
               fecha.add(turnoController.getTurnoGnral![i].fecha);
               notas.add(turnoController.getTurnoGnral![i].descripcion);
-              fotos.add(turnoController.getTurnoGnral![j].foto);
+              fotos.add(turnoController.getTurnoGnral![i].foto);
               idNotas.add(turnoController.getTurnoGnral![i].idTurno);
+            }
+            if (clienteController.getClienteGnral![j].identificacion ==
+                    turnoController.getTurnoGnral![i].idCliente &&
+                turnoController.getTurnoGnral![i].estado != "Pendiente") {
+              nombresFinalizado
+                  .add(clienteController.getClienteGnral![j].nombre);
+              horasFinalizado.add(turnoController.getTurnoGnral![i].hora);
+
+              fotosFinalizado.add(turnoController.getTurnoGnral![i].foto);
             }
           }
         }
@@ -247,11 +260,9 @@ class _CargarCardsState extends State<CargarCards> {
   @override
   Widget build(BuildContext context) {
     return nombres.isEmpty
-        ? Center(
-            child: LoadingAnimationWidget.threeRotatingDots(
-            color: const Color.fromARGB(150, 6, 68, 108),
-            size: 10,
-          ))
+        ? const Center(
+            child: Text("No hay turnos para mostrar "),
+          )
         : ListView.builder(
             itemCount: nombres.length,
             //scrollDirection: Axis.horizontal,
@@ -333,6 +344,12 @@ class _CargarCardsState extends State<CargarCards> {
                                           color: Colors.redAccent)),
                                   IconButton(
                                       onPressed: () {
+                                        if (selectedItem != "Seleccione" &&
+                                            selectedItem != null) {
+                                          PeticionesTurno.actualizarEstado(
+                                              idNotas.elementAt(index),
+                                              selectedItem.toString());
+                                        }
                                         Navigator.of(context).pop();
                                         setState(() {});
                                       },

@@ -73,35 +73,48 @@ class _RegisterStepperState extends State<RegisterStepper> {
             onStepContinue: () {
               final isLastStep = currentStep == getSteps().length - 1;
               if (isLastStep) {
-                var cliente = <String, dynamic>{
-                  "tipoId": tipoId,
-                  "identificacion": controlidentificacion.text,
-                  "nombre": controlnombre.text,
-                  "apellido": controlapellido.text,
-                  "direccion": controldireccion.text,
-                  "email": widget.user,
-                  "telefono": controlnumero.text,
-                  "foto": ''
-                };
-                var user = <String, dynamic>{
-                  'email': widget.user,
-                  'rol': 'Cliente',
-                  'id': controlidentificacion.text
-                };
-                controlUserPerfil.crearcatalogo(cliente, _image);
-                controlUsuario.crearcatalogo(user);
-                controlu.crearUser(widget.user, widget.password).then((value) {
-                  if (controlu.userValido == null) {
-                    Get.snackbar(widget.user, controlu.mensajesUser,
-                        duration: const Duration(seconds: 4),
-                        backgroundColor: Colors.red);
-                  } else {
-                    Get.snackbar(widget.user, controlu.mensajesUser,
-                        duration: const Duration(seconds: 4),
-                        backgroundColor: Colors.green);
-                    Get.offAllNamed("/login");
-                  }
-                });
+                if (controlidentificacion.text.isEmpty ||
+                    controlnombre.text.isEmpty ||
+                    controlapellido.text.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      backgroundColor: Color.fromARGB(250, 6, 68, 108),
+                      content: Text(
+                        'Verifique los datos',
+                        style: TextStyle(color: Colors.white),
+                      )));
+                } else {
+                  var cliente = <String, dynamic>{
+                    "tipoId": tipoId,
+                    "identificacion": controlidentificacion.text,
+                    "nombre": controlnombre.text,
+                    "apellido": controlapellido.text,
+                    "direccion": controldireccion.text,
+                    "email": widget.user,
+                    "telefono": controlnumero.text,
+                    "foto": ''
+                  };
+                  var user = <String, dynamic>{
+                    'email': widget.user,
+                    'rol': 'Cliente',
+                    'id': controlidentificacion.text
+                  };
+                  controlUserPerfil.crearcatalogo(cliente, _image);
+                  controlUsuario.crearcatalogo(user);
+                  controlu
+                      .crearUser(widget.user, widget.password)
+                      .then((value) {
+                    if (controlu.userValido == null) {
+                      Get.snackbar(widget.user, controlu.mensajesUser,
+                          duration: const Duration(seconds: 4),
+                          backgroundColor: Colors.red);
+                    } else {
+                      Get.snackbar(widget.user, controlu.mensajesUser,
+                          duration: const Duration(seconds: 4),
+                          backgroundColor: Colors.green);
+                      Get.offAllNamed("/login");
+                    }
+                  });
+                }
               } else {
                 setState(() => currentStep += 1);
               }

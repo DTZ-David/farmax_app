@@ -92,11 +92,11 @@ class _RegistrarCitaPagina2State extends State<RegistrarCitaPagina2> {
             horasDisponibles
                 .add(asesorController.getAsesorGnral![i].horario[j]);
           }
+          break; // Exit the loop after adding hours for the advisor
         }
       }
     } else {
       for (var turno in turnoController.getTurnoGnral!) {
-        print("PASA POR ACA");
         if (turno.idAsesor == id) {
           for (var i = 0; i < asesorController.getAsesorGnral!.length; i++) {
             if (asesorController.getAsesorGnral![i].id == id) {
@@ -117,13 +117,16 @@ class _RegistrarCitaPagina2State extends State<RegistrarCitaPagina2> {
                   }
                 }
 
-                if (!horaOcupada) {
+                if (!horaOcupada &&
+                    !horasDisponibles.contains(
+                        asesorController.getAsesorGnral![i].horario[k])) {
                   horasDisponibles
                       .add(asesorController.getAsesorGnral![i].horario[k]);
                 }
               }
             }
           }
+          break; // Exit the loop after adding hours for the advisor
         } else {
           for (var i = 0; i < asesorController.getAsesorGnral!.length; i++) {
             if (asesorController.getAsesorGnral![i].id == id) {
@@ -133,6 +136,7 @@ class _RegistrarCitaPagina2State extends State<RegistrarCitaPagina2> {
                 horasDisponibles
                     .add(asesorController.getAsesorGnral![i].horario[j]);
               }
+              break; // Exit the loop after adding hours for the advisor
             }
           }
         }

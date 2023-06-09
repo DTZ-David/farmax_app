@@ -260,7 +260,11 @@ class _CargarCardsState extends State<CargarCards> {
   @override
   Widget build(BuildContext context) {
     Future<void> _refresh() {
-      return Future.delayed(const Duration(seconds: 3));
+      return Future.delayed(const Duration(seconds: 3), () {
+        setState(() {
+          const CargarCards();
+        });
+      });
     }
 
     return nombres.isEmpty
